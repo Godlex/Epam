@@ -1,0 +1,10 @@
+<application>
+  <component name="UpdatesConfigurable">
+    <ignoredBuildNumbers>
+      <item value="202.7660.16" />
+    </ignoredBuildNumbers>
+    <option name="LAST_BUILD_CHECKED" value="RD-202.7660.16" />
+    <option name="LAST_TIME_CHECKED" value="1605175216190" />
+    <option name="UPDATE_CHANNEL_TYPE" value="beta" />
+  </component>
+</application>
