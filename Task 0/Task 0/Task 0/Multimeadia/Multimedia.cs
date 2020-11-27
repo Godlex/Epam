@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Task_0
 {
-    public class Multimedia : ICollection<MediaFile>
+    public class Multimedia : IMultimedia
     {
         public List<MediaFile> MediaFiles; //IList<...>
 
@@ -14,7 +15,8 @@ namespace Task_0
         public Multimedia(List<MediaFile> mediaFiles)
         {
             MediaFiles = new List<MediaFile>();
-        }
+        } 
+        
         public MediaFile this[int index]
         {
             get { return MediaFiles[index]; }

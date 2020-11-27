@@ -11,6 +11,7 @@ namespace Task_0
             M.Add(P);
             Console.WriteLine(M);
             PlayList playList = new PlayList();
+            playList.Name = "Best musik";
             for (int i = 0; i < M.Count(); i++)
             {
                 playList.Add(M[i]);
