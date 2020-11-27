@@ -18,6 +18,7 @@ namespace Task_0
                 playList.Add(M[i]);
             }
             playList.Play();
+            playList.Play();
         }
     }
 }
