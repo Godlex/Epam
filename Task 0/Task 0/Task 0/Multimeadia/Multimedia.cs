@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -39,6 +40,14 @@ namespace Task_0
         public int Count()
         {
             return MediaFiles.Count;
+        }
+        public void Play()
+        {
+            Console.WriteLine($"Multimedia list :");
+            foreach (var m in MediaFiles)
+            {
+                m.Play();
+            }
         }
         public override string ToString()
         {
