@@ -21,7 +21,7 @@ namespace Task_0
       
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder(); // только в цикл
             stringBuilder.Append("Item\n");
             stringBuilder.Append($"Name: {Name}\n");
             return stringBuilder.ToString();
