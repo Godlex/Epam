@@ -5,46 +5,46 @@ using System.Text;
 
 namespace Task_0
 {
-    public class Multimedia : IMultimedia
+    public class Multimedia : IMultimedia //GEtInumerbale 
     {
-        public List<MediaFile> MediaFiles; //IList<...>
+        private IList<MediaFile> _mediaFiles; //IList<...>
 
         public Multimedia()
         {
-            MediaFiles=new List<MediaFile>();
+            _mediaFiles=new List<MediaFile>();
         }
         public Multimedia(List<MediaFile> mediaFiles)
         {
-            MediaFiles = new List<MediaFile>();
+            _mediaFiles = mediaFiles;
         } 
         
         public MediaFile this[int index]
         {
-            get { return MediaFiles[index]; }
-            set { MediaFiles[index] = value; }
+            get { return _mediaFiles[index]; }
+            set { _mediaFiles[index] = value; }
         }
         
         public void Add(MediaFile mediaFile)
         {
-            MediaFiles.Add(mediaFile);
+            _mediaFiles.Add(mediaFile);
         }
         
         public  void Remove(MediaFile mediaFile)
         {
-            MediaFiles.Remove(mediaFile);
+            _mediaFiles.Remove(mediaFile);
         }
         public void Remove(int index)
         {
-            MediaFiles.RemoveAt(index);
+            _mediaFiles.RemoveAt(index);
         }
         public int Count()
         {
-            return MediaFiles.Count;
+            return _mediaFiles.Count;
         }
         public void Play()
         {
             Console.WriteLine($"Multimedia list :");
-            foreach (var m in MediaFiles)
+            foreach (var m in _mediaFiles)
             {
                 m.Play();
             }
@@ -54,9 +54,9 @@ namespace Task_0
             
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("Multimedia\nComponents:\n");
-            for (int i = 0; i < MediaFiles.Count; i++)
+            for (int i = 0; i < _mediaFiles.Count; i++)
             {
-                stringBuilder.Append($"{i + 1}:\n{MediaFiles[i]}\n");
+                stringBuilder.Append($"{i + 1}:\n{_mediaFiles[i]}\n");
             }
             return stringBuilder.ToString();
         }

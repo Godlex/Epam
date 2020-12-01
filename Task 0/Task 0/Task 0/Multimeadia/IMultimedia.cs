@@ -2,19 +2,12 @@ using System.Collections.Generic;
 
 namespace Task_0
 {
-    public interface IMultimedia 
+    public interface IMultimedia // метод
     {
 
-        public void Add(MediaFile mediaFile)
-        {
-        }
-        
-        public  void Remove(MediaFile mediaFile)
-        {
-        }
-        public void Remove(int index)
-        {
-        }
-    
+        void Add(MediaFile mediaFile);
+        void Remove(MediaFile mediaFile);
+        void Remove(int index);
+
     }
 }

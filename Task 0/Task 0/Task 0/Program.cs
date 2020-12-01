@@ -6,8 +6,8 @@ namespace Task_0
     {
         static void Main(string[] args)
         {
-            Multimedia M = new Multimedia(); //IMultimedia
-            Photo P = new Photo("gdfg",123);
+            IMultimedia multimedia = new Multimedia(); //IMultimedia
+            Photo photo = new Photo("gdfg",123);
             M.Add(P);
             Console.WriteLine(M);
             PlayList playList = new PlayList();
@@ -17,6 +17,7 @@ namespace Task_0
             {
                 playList.Add(M[i]);
             }
+            multimedia.Add(playList);
             playList.Play();
         }
     }

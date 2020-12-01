@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 
 namespace Task_0
 {
-    public class PlayList : MediaFile  //дублировать Multimedia
+    public class PlayList : IPlayList //дублировать Multimedia 
     {
-        public List<MediaFile> MediaFiles;
-        
+        public IList<MediaFile> MediaFiles;
+
         public PlayList()
         {
             MediaFiles=new List<MediaFile>();
         }
         public PlayList(List<MediaFile> mediaFiles)
         {
-            MediaFiles = new List<MediaFile>();
+            MediaFiles = mediaFiles;
         } 
         
         public MediaFile this[int index]
@@ -27,7 +28,31 @@ namespace Task_0
         {
             MediaFiles.Add(mediaFile);
         }
-        
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(MediaFile item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(MediaFile[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<MediaFile>.Remove(MediaFile item)
+        {
+            throw new NotImplementedException();
+        }
+
+        int ICollection<MediaFile>.Count => _count;
+
+        public bool IsReadOnly { get; }
+
         public  void Remove(MediaFile mediaFile)
         {
             MediaFiles.Remove(mediaFile);
@@ -48,6 +73,15 @@ namespace Task_0
                 m.Play();
             }
         }
-        
+
+        public IEnumerator<MediaFile> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
