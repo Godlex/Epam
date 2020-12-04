@@ -1,4 +1,4 @@
-﻿namespace Gift.lib.Models
+﻿namespace Gift
 {
     public class Marmalade : Sweetness
     {

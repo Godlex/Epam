@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Gift.lib.Models;
 
-namespace Gift.lib.Gift
+namespace Gift
 {
     public class Gift : IGift
     {
@@ -20,12 +20,7 @@ namespace Gift.lib.Gift
         {
             return GetEnumerator();
         }
-        public Sweetness this[int index]
-        {
-            get { return sweetnesses[index]; }
-            set {sweetnesses[index] = value; }
-        }
-        
+
         public void Add(Sweetness sweetness)
         {
             sweetnesses.Add(sweetness);
