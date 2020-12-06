@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Gift.lib.Models;
 
 namespace Gift
 {
