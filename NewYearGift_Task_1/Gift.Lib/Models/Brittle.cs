@@ -4,18 +4,18 @@
     {
         public NutType NutType { get; set; }
         
-        public Brittle(string name, double weight,double caloric,double price,Filing filing,NutType nutType) : base(name,weight,caloric,price,filing)
+        public Brittle(string name, double weight,double sugar,double price,Filing filing,NutType nutType) : base(name,weight,sugar,price,filing)
         {
             Name = name;
             Weight = weight;
-            Caloric = caloric;
+            Sugar = sugar;
             Price = price;
             Filing = filing;
             NutType = nutType;
         }
         public override string ToString()
         {
-            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {Caloric}\nPrice: {Price}\nFilling {Filing}\nNutType: {NutType}\n";
+            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {Sugar}\nPrice: {Price}\nFilling {Filing}\nNutType: {NutType}\n";
         }
     }
 }

@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Gift
 {
     public class Gift : IGift
     {
-        private IList<Sweetness> sweetnesses = new List<Sweetness>(); //Enumerable
+        private IList<Sweetness> sweetnesses ; //Enumerable
         public Gift()
         {
             sweetnesses = new List<Sweetness>();
@@ -38,7 +41,7 @@ namespace Gift
             return sweetnesses.Count == 0;
         }
 
-        public double GetTotalWeight()
+        public double Weight()
         {
             return sweetnesses.Sum(s => s.Weight);
         }
@@ -59,33 +62,31 @@ namespace Gift
             }
             return count;
         }
-        
-        
+
+        public IList<Sweetness> FindBySugarRange(double min, double max)
+        {
+            return sweetnesses.Where(sweetnesses => sweetnesses.Sugar > min && sweetnesses.Sugar < max).ToList();
+        }
 
         public void SortBy() //OrderBy переделать 
         {
-            List<Sweetness> sweetItem = sweetnesses;
-            for (int i = 0; i < sweetItem.Count-1; i++)
-            {
-                for (int j = i + 1; j < sweetItem.Count; j++)
-                {
-                    if (sweetItem[i].Weight < sweetItem[j].Weight )
-                    {
-                        Sweetness temp = sweetItem[i];
-                        sweetItem[i] = sweetItem[j];
-                        sweetItem[j] = temp;
-                    }
-                }
-            }
         }
 
-        public double GetTotalPrice(double PricForKG) 
+        public double Price() 
         {
             return sweetnesses.Sum(s=>s.Price);
         }
 
         public override string ToString()
         {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("Gift: \n");
+            foreach (var Item in sweetnesses)
+            {
+                stringBuilder.Append($"{Item}\n");
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }

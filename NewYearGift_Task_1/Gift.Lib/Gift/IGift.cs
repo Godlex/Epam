@@ -7,13 +7,12 @@ namespace Gift
         void Add(Sweetness sweetness);
         void Remove(Sweetness sweetness);
         bool IsEmpty();
-        double GetTotalWeight();
+        double Weight();
 
         int IndexHeavistCandy();
 
         void SortBy(); //OrderBy переделать 
 
-        double GetTotalPrice(double PricForKG);
-
+        double Price();
     }
 }
