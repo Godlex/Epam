@@ -3,18 +3,18 @@
     public class Gummy : Marmalade
     {
         public Color Color { get; set; }
-        public Gummy(string name, double weight,double sugar,double price,MarmeladeTaste marmeladeTaste,Color color) : base(name,weight,sugar,price,marmeladeTaste)
+        public Gummy(string name, double weight,double sugarWeight,double price,MarmeladeTaste marmeladeTaste,Color color) : base(name,weight,sugarWeight,price,marmeladeTaste)
         {
             Name = name;
             Weight = weight;
-            Sugar = sugar;
+            SugarWeight = sugarWeight;
             Price = price;
             MarmeladeTaste=marmeladeTaste;
             Color = color;
         }
         public override string ToString()
         {
-            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {Sugar}\nPrice: {Price}\nTaste: {MarmeladeTaste}\nColor: {Color}";
+            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {SugarWeight}\nPrice: {Price}\nTaste: {MarmeladeTaste}\nColor: {Color}";
         }
     }
 }

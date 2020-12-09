@@ -1,21 +1,21 @@
-﻿namespace Gift
+﻿namespace Gift.lib.Models
 {
     public class Brittle : Candy //грильяж 
     {
         public NutType NutType { get; set; }
         
-        public Brittle(string name, double weight,double sugar,double price,Filing filing,NutType nutType) : base(name,weight,sugar,price,filing)
+        public Brittle(string name, double weight,double sugarWeight,double price,Filing filing,NutType nutType) : base(name,weight,sugarWeight,price,filing)
         {
             Name = name;
             Weight = weight;
-            Sugar = sugar;
+            SugarWeight = sugarWeight;
             Price = price;
             Filing = filing;
             NutType = nutType;
         }
         public override string ToString()
         {
-            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {Sugar}\nPrice: {Price}\nFilling {Filing}\nNutType: {NutType}\n";
+            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {SugarWeight}\nPrice: {Price}\nFilling {Filing}\nNutType: {NutType}\n";
         }
     }
 }

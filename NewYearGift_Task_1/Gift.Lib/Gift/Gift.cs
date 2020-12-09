@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
-namespace Gift
+namespace Gift.lib.Gift
 {
-    public class Gift : IGift
+    public class Gift : IGift,IEnumerable<Sweetness>
     {
-        private IList<Sweetness> sweetnesses ; //Enumerable
+        private IList<Sweetness> sweetnesses; //Enumerable
+
         public Gift()
         {
             sweetnesses = new List<Sweetness>();
         }
+
         public IEnumerator<Sweetness> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return sweetnesses.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -32,51 +35,60 @@ namespace Gift
         {
             sweetnesses.Remove(sweetness);
         }
+
         public void Remove(int index)
         {
-            if(index>0) sweetnesses.RemoveAt(index);
+            if (index < 0) throw new ArgumentException("Index is not correct");
+            sweetnesses.RemoveAt(index);
         }
+
         public bool IsEmpty()
         {
             return sweetnesses.Count == 0;
         }
 
-        public double Weight()
+        public int[] GetHeavistCandyIndex()
         {
-            return sweetnesses.Sum(s => s.Weight);
-        }
-
-        public int IndexHeavistCandy()
-        {
-            double control_weight=0;
-            int count = -1;
-            for (int i=0;i<sweetnesses.Count;i++)
+           /* sweetnesses.Max(s => s.Weight);
+            int[] index;
+            int i = 0;
+            foreach (Sweetness item in sweetnesses )
             {
-                if (sweetnesses[i] is Candy)
+                if (item.Weight >= sweetnesses[0].Weight)
                 {
-                    if (control_weight < sweetnesses[i].Weight)
-                    {
-                        count = i;
-                    }
+                    index[i] = i;
                 }
+            }*/
+
+            return new int[]{};
+        }
+
+        public IEnumerable<Sweetness> FindBySugarRange(double leftRangeWeight, double rightRangeWeight) 
+        {
+            return sweetnesses.Where(sweetnesses => sweetnesses.SugarWeight > leftRangeWeight && sweetnesses.SugarWeight < rightRangeWeight);
+        }
+        
+
+        public double TotalPrice
+        {
+            get
+            {
+                return sweetnesses.Sum(s => s.Price);
             }
-            return count;
         }
 
-        public IList<Sweetness> FindBySugarRange(double min, double max)
+        public double TotalWeight
         {
-            return sweetnesses.Where(sweetnesses => sweetnesses.Sugar > min && sweetnesses.Sugar < max).ToList();
+            get
+            {
+                return sweetnesses.Sum(s => s.Weight);
+            }
         }
 
-        public void SortBy() //OrderBy переделать 
+        public IEnumerable<Sweetness> GetSorterSweetnessesBy<TProperty>(Func<Sweetness,TProperty> keySelectror) //OrderBy переделать //ByWeight
         {
+            return  sweetnesses.OrderBy(keySelectror);
         }
-
-        public double Price() 
-        {
-            return sweetnesses.Sum(s=>s.Price);
-        }
-
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();

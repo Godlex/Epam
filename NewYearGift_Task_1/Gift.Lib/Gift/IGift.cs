@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Gift
+namespace Gift.lib.Gift
 {
-    public interface IGift : IEnumerable<Sweetness>
+    public interface IGift 
     {
         void Add(Sweetness sweetness);
         void Remove(Sweetness sweetness);
         bool IsEmpty();
-        double Weight();
-
-        int IndexHeavistCandy();
-
-        void SortBy(); //OrderBy переделать 
-
-        double Price();
+        int[] GetHeavistCandyIndex();
+        IEnumerable<Sweetness> GetSorterSweetnessesBy<TProperty>(Func<Sweetness, TProperty> keySelectror);
+        double TotalPrice { get; }
+        double TotalWeight { get; }
     }
 }
