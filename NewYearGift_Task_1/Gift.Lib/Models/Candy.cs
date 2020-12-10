@@ -2,18 +2,21 @@
 {
     public class Candy : Sweetness
     {
-        public Filing Filing { get; set; } //Type
-        public Candy(string name, double weight,double sugarWeight,double price,Filing filing) : base(name,weight,sugarWeight,price)
+        public FilingType FilingType { get; set; } 
+
+        public Candy(string name, double weight, double sugarWeight, double price, FilingType filingType) : base(name, weight,
+            sugarWeight, price)
         {
             Name = name;
             Weight = weight;
             SugarWeight = sugarWeight;
             Price = price;
-            Filing = filing;
+            FilingType = filingType;
         }
+
         public override string ToString()
         {
-            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {SugarWeight}\nPrice: {Price}\nFilling: {Filing}\n";
+            return $"Name: {Name}\n Weight: {Weight}\nCaloric: {SugarWeight}\nPrice: {Price}\nFilling: {FilingType}\n";
         }
     }
 }

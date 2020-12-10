@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Gift.lib.Gift
 {
-    public class Gift : IGift,IEnumerable<Sweetness>
+    public class Gift : IGift, IEnumerable<Sweetness>
     {
-        private IList<Sweetness> sweetnesses; //Enumerable
+        private IList<Sweetness> sweetnesses;
 
         public Gift()
         {
@@ -49,46 +49,42 @@ namespace Gift.lib.Gift
 
         public int[] GetHeavistCandyIndex()
         {
-           /* sweetnesses.Max(s => s.Weight);
-            int[] index;
+            sweetnesses.Max(s => s.Weight);
+            int[] index = new int [sweetnesses.Count];
             int i = 0;
-            foreach (Sweetness item in sweetnesses )
+            foreach (Sweetness item in sweetnesses)
             {
-                if (item.Weight >= sweetnesses[0].Weight)
+                if (item.Weight >= sweetnesses[0].Weight && item is Candy)
                 {
                     index[i] = i;
+                    i++;
                 }
-            }*/
+            }
 
-            return new int[]{};
+            return index;
         }
 
-        public IEnumerable<Sweetness> FindBySugarRange(double leftRangeWeight, double rightRangeWeight) 
+        public IEnumerable<Sweetness> FindBySugarRange(double leftRangeWeight, double rightRangeWeight)
         {
-            return sweetnesses.Where(sweetnesses => sweetnesses.SugarWeight > leftRangeWeight && sweetnesses.SugarWeight < rightRangeWeight);
+            return sweetnesses.Where(sweetnesses =>
+                sweetnesses.SugarWeight > leftRangeWeight && sweetnesses.SugarWeight < rightRangeWeight);
         }
-        
 
         public double TotalPrice
         {
-            get
-            {
-                return sweetnesses.Sum(s => s.Price);
-            }
+            get { return sweetnesses.Sum(s => s.Price); }
         }
 
         public double TotalWeight
         {
-            get
-            {
-                return sweetnesses.Sum(s => s.Weight);
-            }
+            get { return sweetnesses.Sum(s => s.Weight); }
         }
 
-        public IEnumerable<Sweetness> GetSorterSweetnessesBy<TProperty>(Func<Sweetness,TProperty> keySelectror) //OrderBy переделать //ByWeight
+        public IEnumerable<Sweetness> GetSorterSweetnessesBy<TProperty>(Func<Sweetness, TProperty> keySelectror)
         {
-            return  sweetnesses.OrderBy(keySelectror);
+            return sweetnesses.OrderBy(keySelectror);
         }
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();

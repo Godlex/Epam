@@ -5,9 +5,10 @@ namespace Gift
     public class Waffle : Sweetness
     {
         public WaffleTaste WaffleTaste { get; set; }
-        public bool IsGlaze { get; set; }//d
-        
-        public Waffle(string name, double weight,double sugarWeight,double price,bool isGlaze,WaffleTaste waffleTaste):base(name, weight, sugarWeight, price)
+        public bool IsGlaze { get; set; } //d
+
+        public Waffle(string name, double weight, double sugarWeight, double price, bool isGlaze,
+            WaffleTaste waffleTaste) : base(name, weight, sugarWeight, price)
         {
             Name = name;
             Weight = weight;
@@ -27,7 +28,7 @@ namespace Gift
             string s = "no";
             if (IsGlaze == true) s = "yes"; //is glaze
             stringBuilder.Append($"\nGlaze: {s}");
-        return stringBuilder.ToString();
+            return stringBuilder.ToString();
         }
     }
 }

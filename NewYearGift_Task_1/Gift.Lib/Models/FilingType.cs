@@ -1,6 +1,6 @@
 ﻿namespace Gift
 {
-    public enum Filing
+    public enum FilingType
     {
         Nut,
         Marmelade,
