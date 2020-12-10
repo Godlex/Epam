@@ -47,18 +47,18 @@ namespace Gift.lib.Gift
             return sweetnesses.Count == 0;
         }
 
-        public int[] GetHeavistCandyIndex()
+        public List<int> GetHeavistCandyIndex()
         {
             sweetnesses.Max(s => s.Weight);
-            int[] index = new int [sweetnesses.Count];
+            List<int> index = new List<int>();
             int i = 0;
             foreach (Sweetness item in sweetnesses)
             {
                 if (item.Weight >= sweetnesses[0].Weight && item is Candy)
                 {
-                    index[i] = i;
-                    i++;
+                    index.Add(i);
                 }
+                i++;
             }
 
             return index;

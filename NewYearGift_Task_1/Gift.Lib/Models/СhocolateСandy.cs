@@ -18,7 +18,7 @@
         public override string ToString()
         {
             return
-                $"Name: {Name}\n Weight: {Weight}\nCaloric: {SugarWeight}\nPrice: {Price}\nFiling: {FilingType}\nChocolateType: {ChocolateType}\n";
+                $"Name: {Name}\nWeight: {Weight}\nCaloric: {SugarWeight}\nPrice: {Price}\nFiling: {FilingType}\nChocolateType: {ChocolateType}\n";
         }
     }
 }

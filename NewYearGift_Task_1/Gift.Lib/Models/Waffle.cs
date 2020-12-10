@@ -21,13 +21,12 @@ namespace Gift
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Salad Item\n");
-            stringBuilder.Append($"Name: {Name}\n Weight: {Weight}\n");
-            stringBuilder.Append($"Caloric: {SugarWeight}\nPrice: {Price}\n");
+            stringBuilder.Append($"Name: {Name}\nWeight: {Weight}\n");
+            stringBuilder.Append($"SugarWeight: {SugarWeight}\nPrice: {Price}\n");
             stringBuilder.Append($"Taste: {WaffleTaste}\n");
             string s = "no";
             if (IsGlaze == true) s = "yes"; //is glaze
-            stringBuilder.Append($"\nGlaze: {s}");
+            stringBuilder.Append($"Glaze: {s}");
             return stringBuilder.ToString();
         }
     }

@@ -19,7 +19,7 @@ namespace Gift
 
         public override string ToString()
         {
-            return $"Name: {Name}\n Weight: {Weight}\n Caloric: {SugarWeight}\nPrice: {Price}\n";
+            return $"Name: {Name}\nWeight: {Weight}\n Caloric: {SugarWeight}\nPrice: {Price}\n";
         }
     }
 }

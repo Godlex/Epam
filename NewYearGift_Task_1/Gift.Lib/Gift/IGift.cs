@@ -9,7 +9,7 @@ namespace Gift.lib.Gift
         void Remove(Sweetness sweetness);
         void Remove(int index);
         bool IsEmpty();
-        int[] GetHeavistCandyIndex();
+        List<int> GetHeavistCandyIndex();
         IEnumerable<Sweetness> FindBySugarRange(double leftRangeWeight, double rightRangeWeight);
         double TotalPrice { get; }
         double TotalWeight { get; }
