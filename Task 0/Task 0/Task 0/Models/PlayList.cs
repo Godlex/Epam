@@ -5,7 +5,9 @@ using System.Net.Sockets;
 
 namespace Task_0
 {
-    public class PlayList : IPlayList //дублировать Multimedia 
+    using System.Text;
+
+    public class PlayList : MediaFile, IPlayList , IEnumerable<MediaFile> 
     {
         public IList<MediaFile> MediaFiles;
 
@@ -28,31 +30,7 @@ namespace Task_0
         {
             MediaFiles.Add(mediaFile);
         }
-
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Contains(MediaFile item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(MediaFile[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool ICollection<MediaFile>.Remove(MediaFile item)
-        {
-            throw new NotImplementedException();
-        }
-
-        int ICollection<MediaFile>.Count => _count;
-
-        public bool IsReadOnly { get; }
-
+        
         public  void Remove(MediaFile mediaFile)
         {
             MediaFiles.Remove(mediaFile);
@@ -76,12 +54,23 @@ namespace Task_0
 
         public IEnumerator<MediaFile> GetEnumerator()
         {
-            throw new NotImplementedException();
+           return MediaFiles.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+        public override string ToString()
+        {
+            
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"Play List {Name}\nComponents:\n");
+            for (int i = 0; i < MediaFiles.Count; i++)
+            {
+                stringBuilder.Append($"{i + 1})\n{MediaFiles[i]}\n");
+            }
+            return stringBuilder.ToString();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Task_0
 {
-    public class Multimedia : IMultimedia //GEtInumerbale 
+    public class Multimedia : IMultimedia , IEnumerable<MediaFile>
     {
         private IList<MediaFile> _mediaFiles; //IList<...>
 
@@ -49,6 +49,16 @@ namespace Task_0
                 m.Play();
             }
         }
+
+        public IEnumerator<MediaFile> GetEnumerator()
+        {
+            return _mediaFiles.GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         public override string ToString()
         {
             
@@ -60,5 +70,7 @@ namespace Task_0
             }
             return stringBuilder.ToString();
         }
+
+      
     }
 }

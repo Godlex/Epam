@@ -8,6 +8,7 @@ namespace Task_0
         void Add(MediaFile mediaFile);
         void Remove(MediaFile mediaFile);
         void Remove(int index);
-
+        public int Count();
+        public void Play();
     }
 }

@@ -6,19 +6,26 @@ namespace Task_0
     {
         static void Main(string[] args)
         {
-            IMultimedia multimedia = new Multimedia(); //IMultimedia
-            Photo photo = new Photo("gdfg",123);
-            M.Add(P);
-            Console.WriteLine(M);
-            PlayList playList = new PlayList();
-            playList.Name = "Best musik";
-            M.Play();
-            for (int i = 0; i < M.Count(); i++)
+            IMultimedia multimedia = new Multimedia()
             {
-                playList.Add(M[i]);
-            }
-            multimedia.Add(playList);
-            playList.Play();
+                new Photo("fdafa",1),
+                new MusicTrack("fdsf",14213),
+                new PlayList()
+                {
+                    new VideoFile("dsaf",124),
+                    new VideoFile("dsaf",124),
+                    new VideoFile("dsaf",124),
+                    new VideoFile("dsaf",124),
+                    new PlayList()
+                    {
+                        new MusicTrack("fdsf",421),
+                        new Photo("fdafa",1),
+                        new MusicTrack("fdsf",14213)
+                    }
+                }
+            };
+            Console.WriteLine(multimedia);
+            multimedia.Play();
         }
     }
 }
