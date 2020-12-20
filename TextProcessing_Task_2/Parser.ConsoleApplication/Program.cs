@@ -7,7 +7,7 @@
 
     static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             string input = ReadFile("input.txt");
             Text text = Parser.Parse(input);

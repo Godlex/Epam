@@ -1,22 +1,34 @@
 ﻿namespace Parser.Library.Models
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
     public class Word : SentenceItem, IWord
     {
-        private IList<Symbol> _symbols;
-        
+        public Word()
+        {
+            Symbols = new List<Symbol>();
+        }
         public Word(string s)
         {
-            foreach (char variable in s)
+            foreach (var variable in s)
             {
-                Symbol c = new Symbol(variable);
-                _symbols.Add(c);
+                Symbol symbol = new Symbol(variable);
+                Symbols.Add(symbol);
             }
-
-            //get legth
-            ////гласная
         }
+
+        public int Lenght
+        {
+            get
+            {
+                return Symbols.Count;
+            }
+        }
+        //get legth
+        //гласная
     }
 }

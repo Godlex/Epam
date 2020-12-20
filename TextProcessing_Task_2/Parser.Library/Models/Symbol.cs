@@ -1,24 +1,36 @@
 ﻿namespace Parser.Library.Models
 {
+    using System;
+
     public class Symbol
     {
-        public char _char;
+        public char Value { get; set; }
 
         public Symbol()
         {
-            _char = new char();
         }
 
-        public Symbol(char c)
+        public Symbol(char value)
         {
-            _char = c;
+            Value = value;
         }
 
+        public bool IsUpper 
+        {
+            get
+            {
+                if (Value.ToString().ToLower() == Value.ToString())
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+        
         public override string ToString()
         {
-            return _char.ToString();
+            return Value+"";
         }
-
         //гласная or нет
         //Upper case or lower 
     }

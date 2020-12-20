@@ -1,22 +1,25 @@
 ﻿namespace Parser.Library.Models
 {
     using System.Collections.Generic;
+    using System.Text;
 
     public abstract class SentenceItem : ISentenceItem
     {
-        public IList<Symbol> _Symbols;
-        
-        
-        public override string ToString()
+        public IList<Symbol> Symbols;
+
+        public SentenceItem()
         {
-            string s = null;
-            
-            foreach (Symbol variable in _Symbols)
+            Symbols = new List<Symbol>();
+        }
+        public override string ToString()
+        { 
+            StringBuilder builder = new StringBuilder();
+            foreach (var item in Symbols)
             {
-                s += variable.ToString();
+                builder.Append(item);
             }
 
-            return s;
+            return builder.ToString();
         }
     }
 }
