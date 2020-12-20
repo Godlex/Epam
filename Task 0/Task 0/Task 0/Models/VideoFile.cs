@@ -6,7 +6,7 @@ namespace Task_0
     public class VideoFile: MediaFile
 
     {
-        public int Lenght { get; set; }
+        public int Lenght { get; set; } //timespan
         public VideoFile(string name,int lenght) : base(name)
         {
             Name = name;
@@ -16,7 +16,6 @@ namespace Task_0
         public override void Play()
         {
             Console.WriteLine($"Video Play: {Lenght}");
-
         }
 
         public override string ToString()

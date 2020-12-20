@@ -9,7 +9,7 @@ namespace Task_0
 
     public class PlayList : MediaFile, IPlayList , IEnumerable<MediaFile> 
     {
-        public IList<MediaFile> MediaFiles;
+        private IList<MediaFile> MediaFiles;
 
         public PlayList()
         {

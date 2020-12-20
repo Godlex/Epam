@@ -5,11 +5,21 @@ namespace Task_0
 {
     public class Photo : MediaFile
     {
-        public int Quality  { get; set; }
+        public int Quality
+        {
+            get;
+            // set
+            // {
+            //     if (value < 0) throw new AggregateException();
+            // };
+            private set;
+
+        }
 
         public Photo(string name,int quality) : base(name)
         {
             Name = name;
+            //проверка quality
             Quality = quality;
         }
 

@@ -15,10 +15,10 @@ namespace Gift.Console
         {
             IGift gift = new Gift()
             {
-                new Candy("Maksum",456,465,864,FilingType.NoFilling),
+                new Candy("Maksum",777,465,864,FilingType.NoFilling),
                 new Candy("Maksum",456,465,864,FilingType.NoFilling),
                 new Gummy("Markus",900,800,700,MarmeladeTaste.Sour,Color.Green),
-                new Candy("Maksum",456,465,864,FilingType.NoFilling),
+                new Candy("Maksum",444,465,864,FilingType.NoFilling),
                 new Waffle("Puprus",555,444,999,isGlaze:true,WaffleTaste.Lemon)
             }; 
             Console.WriteLine(gift);
