@@ -2,7 +2,6 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Net.Sockets;
 
     public class Text : IText, IEnumerable<Sentence>
     {
@@ -35,7 +34,6 @@
         //GetSortedSentenceByWordCount
         //GetWordByWordLenghtForQautions
         //Delete
-        //Replace       
-        
+        //Replace   
     }
 }

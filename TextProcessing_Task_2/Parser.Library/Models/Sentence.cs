@@ -47,7 +47,7 @@
         //проверка на вопросительное 
         //getwordcount
         //getwordbylength
-        //deletewordbyleght
-        //ReplaceWordByLength
+        //getdeletewordbyleght
+        //getReplaceWordByLength
     }
 }

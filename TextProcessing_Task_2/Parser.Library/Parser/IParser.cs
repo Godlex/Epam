@@ -1,7 +1,10 @@
 ﻿namespace Parser.Library.Parser
 {
-    public interface IParser
+    using System;
+    using Models;
+
+    public interface IParser : IDisposable
     {
-        
+        public Text Parse();
     }
 }

@@ -1,10 +1,8 @@
 ﻿namespace Parser.Library.Models
 {
-    using System;
-
     public class Symbol
     {
-        public char Value { get;private set; }
+        public char Value { get; private set; }
 
         public Symbol()
         {
