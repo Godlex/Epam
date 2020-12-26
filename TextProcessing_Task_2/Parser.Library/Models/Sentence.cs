@@ -12,10 +12,14 @@
         {
             _sentenceItems = new List<SentenceItem>();
         }
-        
+
         public Sentence(IList<SentenceItem> sentenceItems)
         {
-            _sentenceItems = sentenceItems;
+            _sentenceItems = new List<SentenceItem>();
+            foreach (var item in sentenceItems)
+            {
+                _sentenceItems.Add(item);
+            }
         }
 
 
@@ -28,7 +32,7 @@
         {
             return GetEnumerator();
         }
-        
+
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
@@ -39,6 +43,7 @@
 
             return builder.ToString();
         }
+
         //проверка на вопросительное 
         //getwordcount
         //getwordbylength

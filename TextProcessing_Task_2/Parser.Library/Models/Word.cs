@@ -8,10 +8,11 @@
 
     public class Word : SentenceItem, IWord
     {
-        public Word()
+        public Word() : base()
         {
             Symbols = new List<Symbol>();
         }
+
         public Word(string s)
         {
             foreach (var variable in s)
@@ -21,13 +22,7 @@
             }
         }
 
-        public int Lenght
-        {
-            get
-            {
-                return Symbols.Count;
-            }
-        }
+        public int Lenght => Symbols.Count;
         //get legth
         //гласная
     }

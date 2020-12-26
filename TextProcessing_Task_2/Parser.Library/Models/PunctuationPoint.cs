@@ -6,19 +6,16 @@
 
     public class PunctuationPoint : SentenceItem, IPunctuationPoint
     {
-        public PunctuationPoint()
+        public PunctuationPoint() : base()
         {
-            Symbols = new List<Symbol>();
         }
-        
-        public PunctuationPoint(string s)
+        public PunctuationPoint(string s) 
         {
-            foreach (char variable in s)
+            foreach (var variable in s)
             {
-                Symbol c = new Symbol(variable);
-                Symbols.Add(c);
+                Symbol symbol = new Symbol(variable);
+                Symbols.Add(symbol);
             }
-            
         }
     }
 }

@@ -2,15 +2,21 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Net.Sockets;
 
     public class Text : IText, IEnumerable<Sentence>
     {
-        private IList<Sentence> _sentences;
+        private readonly IList<Sentence> _sentences;
 
         public Text()
         {
             _sentences = new List<Sentence>();
         }
+        public Text(IList<Sentence> sentence)
+        {
+            _sentences = sentence;
+        }
+        
         public IEnumerator<Sentence> GetEnumerator()
         {
             return _sentences.GetEnumerator();
@@ -19,10 +25,12 @@
         {
             return GetEnumerator();
         }
-        public Text(IList<Sentence> sentence)
+
+        public void Add(Sentence sentence)
         {
-            _sentences = sentence;
+            _sentences.Add(sentence);
         }
+       
         
         //GetSortedSentenceByWordCount
         //GetWordByWordLenghtForQautions

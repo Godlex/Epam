@@ -4,7 +4,7 @@
 
     public class Symbol
     {
-        public char Value { get; set; }
+        public char Value { get;private set; }
 
         public Symbol()
         {
@@ -12,24 +12,20 @@
 
         public Symbol(char value)
         {
-            Value = value;
+            Value = value; 
         }
 
-        public bool IsUpper 
+        public bool IsLower 
         {
             get
             {
-                if (Value.ToString().ToLower() == Value.ToString())
-                {
-                    return false;
-                }
-                return true;
+                return Value.ToString().ToLower() == Value.ToString();
             }
         }
         
         public override string ToString()
         {
-            return Value+"";
+            return Value.ToString();
         }
         //гласная or нет
         //Upper case or lower 

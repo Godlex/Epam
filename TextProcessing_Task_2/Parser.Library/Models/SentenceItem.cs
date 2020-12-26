@@ -3,13 +3,22 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public abstract class SentenceItem : ISentenceItem
+    public abstract class SentenceItem : ISentenceItem 
     {
-        public IList<Symbol> Symbols;
+        protected IList<Symbol> Symbols;
 
-        public SentenceItem()
+        protected SentenceItem()
         {
             Symbols = new List<Symbol>();
+        }
+
+        protected SentenceItem(string s)
+        {
+            foreach (char variable in s)
+            {
+                Symbol c = new Symbol(variable);
+                Symbols.Add(c);
+            }
         }
         public override string ToString()
         { 
@@ -18,7 +27,6 @@
             {
                 builder.Append(item);
             }
-
             return builder.ToString();
         }
     }

@@ -1,75 +1,57 @@
 ﻿namespace Parser.Library.Parser
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.RegularExpressions;
     using Models;
+    using Constant;
 
     public class Parser : IParser
     {
-        private static readonly string[] PunctuationMarks = {",", ";", "\"", "'", "\n", " ", "—", "-"};
-
-        private static readonly string[] SentenceDividers = {".", "!", "?", "?!", "!?", "..."};
-
         public static Text Parse(string text)
         {
-            IList<Sentence> sentences = new List<Sentence>();
+            Text t = new Text(); //text add
             
             IList<SentenceItem> currentItems = new List<SentenceItem>();
             
-            text = Regex.Replace(text, @"( +)|(\t+)|(\r)", " ");
+            text = Regex.Replace(text, @"( +)|(\t+)|(\r)|(\n)", " ");
             
-            MatchCollection matchCollection = Regex.Matches(text, @"(\w+\-)+(\w+)|(\w+)|([\W_-[\s]]+)|(\s)");
+            MatchCollection matchCollection = Regex.Matches(text, @"(\w+\-)+(\w+)|(\w+)|([\W_-[\s]]+)|(\s)|(\w+\')+(\w+)");
             
             foreach (Match match in matchCollection)
             {
-                string s = match.Value;
+                string currentMatch = match.Value;
                 
-                if (IsWord(s))
+                if (Constants.IsWord(currentMatch))
                 {
-                    Word word = new Word(s);
+                    Word word = new Word(currentMatch);
                     currentItems.Add(word);
                 }
 
-                if (IsPunctuationMark(s))
+                if (Constants.IsPunctuationMark(currentMatch))
                 {
-                    PunctuationPoint punctuationPoint = new PunctuationPoint(s);
+                    PunctuationPoint punctuationPoint = new PunctuationPoint(currentMatch);
                     currentItems.Add(punctuationPoint);
                 }
 
-                if (IsSentenceDivider(s))
+                if (Constants.IsSentenceDivider(currentMatch))
                 {
-                    PunctuationPoint divider = new PunctuationPoint(s);
+                    PunctuationPoint divider = new PunctuationPoint(currentMatch);
                     currentItems.Add(divider);
 
                     Sentence sentence = new Sentence(currentItems);
                     currentItems.Clear();
-                    
-                    sentences.Add(sentence);
+
+                    t.Add(sentence);
                 }
             }
-
-            Text t = new Text(sentences);
-            
             return t;
         }
 
 
-        private static bool IsWord(string s)
-        {
-            return Regex.IsMatch(s, @"(\w+)|(\w+\-)+(\w+)");
-        }
-
-        private static bool IsPunctuationMark(string s)
-        {
-            return ((IList) PunctuationMarks).Contains(s);
-        }
-
-        private static bool IsSentenceDivider(string s)
-        {
-            return ((IList) SentenceDividers).Contains(s);
-        }
+        
     }
 }
 
