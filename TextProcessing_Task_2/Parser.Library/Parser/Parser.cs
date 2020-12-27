@@ -37,12 +37,12 @@
 
         private void ParseLine(string lineText)
         {
-            //text add
             IList<SentenceItem> currentItems = new List<SentenceItem>();
-            lineText = Regex.Replace(lineText, @"( +)|(\t+)|(\r)|(\n)", " ");
+            lineText = Regex.Replace(lineText, @"( +\t+)|( +)|(\t+)|(\r+)|(\n+)", " ");
 
             MatchCollection matchCollection =
                 Regex.Matches(lineText, @"(\w+\-)+(\w+)|(\w+)|([\W_-[\s]]+)|(\s)|(\w+\')+(\w+)");
+            int i = 1;
             foreach (Match match in matchCollection)
             {
                 string currentMatch = match.Value;
@@ -54,16 +54,25 @@
                 }
                 else if (IsPunctuationMark(currentMatch))
                 {
-                    PunctuationPoint punctuationPoint = new PunctuationPoint(currentMatch);
-                    currentItems.Add(punctuationPoint);
+                    if (i ==1 && currentMatch.Equals(" "))
+                    {
+                        
+                    }
+                    else
+                    {
+                        PunctuationPoint punctuationPoint = new PunctuationPoint(currentMatch);
+                        currentItems.Add(punctuationPoint);
+                    }
                 }
                 else if (IsSentenceDivider(currentMatch))
                 {
                     PunctuationPoint divider = new PunctuationPoint(currentMatch);
                     currentItems.Add(divider);
-
+                    i = 0;
                     FlushText(currentItems);
                 }
+
+                i++;
             }
 
             FlushText(currentItems);

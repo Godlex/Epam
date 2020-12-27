@@ -9,13 +9,8 @@
         public PunctuationPoint() : base()
         {
         }
-        public PunctuationPoint(string s) 
+        public PunctuationPoint(string s) : base(s)
         {
-            foreach (var variable in s)
-            {
-                Symbol symbol = new Symbol(variable);
-                Symbols.Add(symbol);
-            }
         }
     }
 }

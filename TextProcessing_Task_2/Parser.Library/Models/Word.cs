@@ -9,16 +9,11 @@
             Symbols = new List<Symbol>();
         }
 
-        public Word(string s)
+        public Word(string s) : base(s)
         {
-            foreach (var variable in s)
-            {
-                Symbol symbol = new Symbol(variable);
-                Symbols.Add(symbol);
-            }
         }
 
-        public int Lenght => Symbols.Count;
+        
         //get legth
         //гласная
     }
