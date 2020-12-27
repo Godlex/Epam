@@ -6,9 +6,6 @@
 
     public class PunctuationPoint : SentenceItem, IPunctuationPoint
     {
-        public PunctuationPoint() : base()
-        {
-        }
         public PunctuationPoint(string s) : base(s)
         {
         }

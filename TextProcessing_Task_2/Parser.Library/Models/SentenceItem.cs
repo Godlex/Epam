@@ -6,12 +6,7 @@
 
     public abstract class SentenceItem : ISentenceItem, IEnumerable<Symbol>
     {
-        protected IList<Symbol> Symbols;
-
-        protected SentenceItem()
-        {
-            Symbols = new List<Symbol>();
-        }
+        protected IList<Symbol> Symbols = new List<Symbol>();
 
         protected SentenceItem(string s)
         {

@@ -19,20 +19,20 @@
             {
                 using var parser = new Parser(path);
                 text = parser.Parse();
-                // text.ReplaceWordBySubstringOnSentence(0,1,"aaaaaaaaa");
-                // IList<Sentence> sen = text.GetSortedSentenceByWordCount();
-                // foreach (var VARIABLE in sen)
-                // {
-                //     Console.WriteLine(VARIABLE);
-                // }
-                //  int wordlenght = 5;
-                // text.DeleteWordByLenghtBeginningByConsonant(wordlenght);
-                //IEnumerable<SentenceItem> words = text.GetUniqueWordByWordLenghtForQuestions(wordlenght);
-                // foreach (var word in words)
-                // {
-                //     Console.WriteLine(word);
-                // }
-                
+                text.ReplaceWordBySubstringOnSentence(0, 3, "aaaaaaaaa");
+                /*IList<Sentence> sen = text.GetSortedSentenceByWordCount();
+                foreach (var sentence in sen)
+                {
+                    Console.WriteLine(sentence);
+                }
+
+                int wordlenght = 5;
+                text.DeleteWordByLenghtBeginningByConsonant(wordlenght);
+                IEnumerable<SentenceItem> words = text.GetUniqueWordByWordLenghtForQuestions(wordlenght);
+                foreach (var word in words)
+                {
+                    Console.WriteLine(word);
+                }*/
             }
             catch (Exception exception)
             {
@@ -52,7 +52,7 @@
             string pathout = ConfigurationManager.AppSettings["FileOutPath"];
             try
             {
-                var writer = new Writer(pathout,text);
+                var writer = new Writer(pathout, text);
                 writer.Write();
             }
             catch (Exception exception)

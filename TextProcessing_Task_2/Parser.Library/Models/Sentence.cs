@@ -89,7 +89,7 @@
         {
             foreach (var sentenceItem in _sentenceItems)
             {
-                if (sentenceItem is Word && sentenceItem.Lenght == wordLenght && sentenceItem.IsBeginningByConsonant() )
+                if (sentenceItem is Word && sentenceItem.Lenght == wordLenght && sentenceItem.IsBeginningByConsonant())
                 {
                     _sentenceItems.Remove(sentenceItem);
                 }
@@ -99,14 +99,15 @@
         public void ReplaceWordBySubstring(int wordLenght, string subString)
         {
             Word newWord = new Word(subString);
-            for (int i=0;i< _sentenceItems.Count;i++)
+            for (int i = 0; i < _sentenceItems.Count; i++)
             {
                 if (_sentenceItems[i] is Word && _sentenceItems[i].Lenght == wordLenght)
                 {
-                    _sentenceItems[i]=newWord;
+                    _sentenceItems[i] = newWord;
                 }
             }
         }
+
 //getReplaceWordByLength +-
     }
 }

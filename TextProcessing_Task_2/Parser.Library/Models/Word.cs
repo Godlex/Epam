@@ -4,10 +4,6 @@
 
     public class Word : SentenceItem, IWord
     {
-        public Word() : base()
-        {
-            Symbols = new List<Symbol>();
-        }
 
         public Word(string s) : base(s)
         {

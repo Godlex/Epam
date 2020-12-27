@@ -8,21 +8,9 @@
     {
         public char Value { get; private set; }
 
-        public Symbol()
-        {
-        }
-
         public Symbol(char value)
         {
             Value = value; 
-        }
-
-        public bool IsLower 
-        {
-            get
-            {
-                return Value.ToString().ToLower() == Value.ToString();
-            }
         }
 
         public bool IsConsonant()
