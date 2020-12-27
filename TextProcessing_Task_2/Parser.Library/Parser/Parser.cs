@@ -12,6 +12,7 @@
     {
         private readonly StreamReader _file;
         private readonly Text _result;
+        private readonly IList<SentenceItem> _currentItems = new List<SentenceItem>();
 
         public Parser(string path)
         {
@@ -32,17 +33,15 @@
                 ParseLine(line);
             }
 
+            FlushText();
             return _result;
         }
 
         private void ParseLine(string lineText)
         {
-            IList<SentenceItem> currentItems = new List<SentenceItem>();
-            lineText = Regex.Replace(lineText, @"( +\t+)|( +)|(\t+)|(\r+)|(\n+)", " ");
+            lineText = ReplaceTabsBySpaces(lineText);
+            MatchCollection matchCollection = MatchSentencesItems(lineText);
 
-            MatchCollection matchCollection =
-                Regex.Matches(lineText, @"(\w+\-)+(\w+)|(\w+)|([\W_-[\s]]+)|(\s)|(\w+\')+(\w+)");
-            int i = 1;
             foreach (Match match in matchCollection)
             {
                 string currentMatch = match.Value;
@@ -50,43 +49,44 @@
                 if (IsWord(currentMatch))
                 {
                     Word word = new Word(currentMatch);
-                    currentItems.Add(word);
+                    _currentItems.Add(word);
                 }
                 else if (IsPunctuationMark(currentMatch))
                 {
-                    if (i ==1 && currentMatch.Equals(" "))
-                    {
-                        
-                    }
-                    else
+                    if (_currentItems.Any() || !currentMatch.Equals(" "))
                     {
                         PunctuationPoint punctuationPoint = new PunctuationPoint(currentMatch);
-                        currentItems.Add(punctuationPoint);
+                        _currentItems.Add(punctuationPoint);
                     }
                 }
                 else if (IsSentenceDivider(currentMatch))
                 {
                     PunctuationPoint divider = new PunctuationPoint(currentMatch);
-                    currentItems.Add(divider);
-                    i = 0;
-                    FlushText(currentItems);
+                    _currentItems.Add(divider);
+                    FlushText();
                 }
-
-                i++;
             }
-
-            FlushText(currentItems);
         }
 
-        private void FlushText(IList<SentenceItem> currentItems)
+        private static MatchCollection MatchSentencesItems(string lineText)
         {
-            if (!currentItems.Any())
+            return Regex.Matches(lineText, @"(\w+\-)+(\w+)|(\w+)|([\W_-[\s]]+)|(\s)|(\w+\')+(\w+)");
+        }
+
+        private static string ReplaceTabsBySpaces(string lineText)
+        {
+            return Regex.Replace(lineText, @"( +\t+)|( +)|(\t+)|(\r+)|(\n+)", " ");
+        }
+
+        private void FlushText()
+        {
+            if (!_currentItems.Any())
             {
                 return;
             }
 
-            Sentence sentence = new Sentence(currentItems);
-            currentItems.Clear();
+            Sentence sentence = new Sentence(_currentItems);
+            _currentItems.Clear();
             _result.Add(sentence);
         }
 

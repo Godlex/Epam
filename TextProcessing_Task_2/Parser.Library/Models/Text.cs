@@ -3,7 +3,6 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Sockets;
 
     public class Text : IText, IEnumerable<Sentence>
     {
@@ -13,6 +12,7 @@
         {
             _sentences = new List<Sentence>();
         }
+
         public Text(IList<Sentence> sentence)
         {
             _sentences = sentence;
@@ -22,6 +22,7 @@
         {
             return _sentences.GetEnumerator();
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -37,18 +38,11 @@
             var newSentencesList = _sentences.OrderBy(x => x.GetWordCount).ToList();
             return newSentencesList;
         }
-        
+
         public IEnumerable<SentenceItem> GetUniqueWordByWordLenghtForQuestions(int wordLenght)
         {
-            IList<SentenceItem> words = new List<SentenceItem>();
-            foreach (var sentence in _sentences)
-            {
-                if (sentence.IsQuestions())
-                {
-                    words = new List<SentenceItem>(wordLenght);
-                }
-            }
-            return words;
+            return _sentences.Where(sentence => sentence.IsQuestions())
+                .SelectMany(sentence => sentence.GetUniqueWordByLenght(wordLenght)).Distinct().ToList();
         }
 
         public void DeleteWordByLenghtBeginningByConsonant(int wordLenght)
@@ -61,11 +55,7 @@
 
         public void ReplaceWordBySubstringOnSentence(int sentenceNumber, int wordLenght, string subString)
         {
-            _sentences[sentenceNumber].ReplaceWordBySubstring(wordLenght,subString);
+            _sentences[sentenceNumber].ReplaceWordBySubstring(wordLenght, subString);
         }
-        //GetSortedSentenceByWordCount +
-        //GetWordByWordLenghtForQautions +-
-        //Delete +-
-        //Replace   
     }
 }

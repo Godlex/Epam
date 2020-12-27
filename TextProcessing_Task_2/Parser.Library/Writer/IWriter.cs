@@ -1,7 +1,10 @@
 ﻿namespace Parser.Library.Writer
 {
-    public interface IWriter
+    using System;
+
+    public interface IWriter : IDisposable
     {
-        
+        public void Write();
+        public new void Dispose();
     }
 }

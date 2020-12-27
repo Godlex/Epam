@@ -1,16 +1,9 @@
 ﻿namespace Parser.Library.Models
 {
-    using System.Collections.Generic;
-
-    public class Word : SentenceItem, IWord
+    public class Word : SentenceItem
     {
-
-        public Word(string s) : base(s)
+        public Word(string value) : base(value)
         {
         }
-
-        
-        //get legth
-        //гласная
     }
 }

@@ -3,15 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration;
-    using System.Linq;
-    using System.Runtime.InteropServices;
     using Library.Models;
     using Library.Parser;
     using Library.Writer;
 
     static class Program
     {
-        static void Main() //самому проверять null  
+        static void Main()
         {
             string path = ConfigurationManager.AppSettings["FileInPath"];
             Text text;
@@ -20,19 +18,18 @@
                 using var parser = new Parser(path);
                 text = parser.Parse();
                 text.ReplaceWordBySubstringOnSentence(0, 3, "aaaaaaaaa");
-                /*IList<Sentence> sen = text.GetSortedSentenceByWordCount();
+                IList<Sentence> sen = text.GetSortedSentenceByWordCount();
                 foreach (var sentence in sen)
                 {
                     Console.WriteLine(sentence);
                 }
-
                 int wordlenght = 5;
                 text.DeleteWordByLenghtBeginningByConsonant(wordlenght);
                 IEnumerable<SentenceItem> words = text.GetUniqueWordByWordLenghtForQuestions(wordlenght);
                 foreach (var word in words)
                 {
                     Console.WriteLine(word);
-                }*/
+                }
             }
             catch (Exception exception)
             {
@@ -52,13 +49,12 @@
             string pathout = ConfigurationManager.AppSettings["FileOutPath"];
             try
             {
-                var writer = new Writer(pathout, text);
+                using var writer = new Writer(pathout, text);
                 writer.Write();
             }
             catch (Exception exception)
             {
                 Console.WriteLine($"File writing failed with error: {exception.Message}");
-                return;
             }
         }
     }

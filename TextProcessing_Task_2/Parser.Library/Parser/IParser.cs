@@ -6,5 +6,6 @@
     public interface IParser : IDisposable
     {
         public Text Parse();
+        public new void Dispose();
     }
 }

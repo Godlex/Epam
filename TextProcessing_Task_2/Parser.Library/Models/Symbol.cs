@@ -10,18 +10,17 @@
 
         public Symbol(char value)
         {
-            Value = value; 
+            Value = value;
         }
 
         public bool IsConsonant()
         {
-            return Constants.Consonant.Contains(Char.ToLower(Value).ToString()); 
+            return Constants.Consonant.Contains(Char.ToLower(Value).ToString());
         }
+
         public override string ToString()
         {
             return Value.ToString();
         }
-        //гласная or нет
-        //Upper case or lower 
     }
 }

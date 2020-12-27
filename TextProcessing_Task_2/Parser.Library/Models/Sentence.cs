@@ -2,20 +2,15 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public class Sentence : ISentence, IEnumerable<SentenceItem>
     {
-        private readonly IList<SentenceItem> _sentenceItems;
-
-        public Sentence()
-        {
-            _sentenceItems = new List<SentenceItem>();
-        }
+        private IList<SentenceItem> _sentenceItems = new List<SentenceItem>();
 
         public Sentence(IList<SentenceItem> sentenceItems)
         {
-            _sentenceItems = new List<SentenceItem>();
             foreach (var item in sentenceItems)
             {
                 _sentenceItems.Add(item);
@@ -38,7 +33,7 @@
             StringBuilder builder = new StringBuilder();
             foreach (var item in _sentenceItems)
             {
-                builder.Append(item);
+                builder.Append(item.ToString());
             }
 
             return builder.ToString();
@@ -63,51 +58,30 @@
 
         public IEnumerable<SentenceItem> GetUniqueWordByLenght(int wordLenght)
         {
-            HashSet<SentenceItem> words = new HashSet<SentenceItem>();
-            foreach (var sentenceItem in _sentenceItems)
-            {
-                if (sentenceItem is Word && sentenceItem.Lenght == wordLenght)
-                {
-                    words.Add(sentenceItem);
-                }
-            }
-
-            return words;
+            return _sentenceItems.Where(sentenceItem => sentenceItem is Word && sentenceItem.Lenght == wordLenght)
+                .Distinct().ToList();
         }
 
         public bool IsQuestions()
         {
-            if (_sentenceItems[_sentenceItems.Count].ToString().Equals("?"))
-            {
-                return true;
-            }
-
-            return false;
+            return _sentenceItems[^1].ToString().Equals("?");
         }
 
         public void DeleteWordByLenghtBeginningByConsonant(int wordLenght)
         {
-            foreach (var sentenceItem in _sentenceItems)
-            {
-                if (sentenceItem is Word && sentenceItem.Lenght == wordLenght && sentenceItem.IsBeginningByConsonant())
-                {
-                    _sentenceItems.Remove(sentenceItem);
-                }
-            }
+            _sentenceItems = _sentenceItems
+                .Where(item => !(item is Word) || item.Lenght != wordLenght || !item.IsBeginningByConsonant()).ToList();
+            // return _sentenceItems
+            //     .Where(item => item is Word && item.Lenght == wordLenght && item.IsBeginningByConsonant()).ToList();
         }
 
         public void ReplaceWordBySubstring(int wordLenght, string subString)
         {
-            Word newWord = new Word(subString);
-            for (int i = 0; i < _sentenceItems.Count; i++)
-            {
-                if (_sentenceItems[i] is Word && _sentenceItems[i].Lenght == wordLenght)
-                {
-                    _sentenceItems[i] = newWord;
-                }
-            }
+            _sentenceItems =
+                _sentenceItems.Select(item => item is Word && item.Lenght == wordLenght ? new Word(subString) : item)
+                    .ToList();
+            /*return _sentenceItems.Select(item => item is Word && item.Lenght == wordLenght ? new Word(subString) : item)
+                .ToList();*/
         }
-
-//getReplaceWordByLength +-
     }
 }
