@@ -71,6 +71,20 @@
         {
             _sentenceItems = _sentenceItems
                 .Where(item => !(item is Word) || item.Lenght != wordLenght || !item.IsBeginningByConsonant()).ToList();
+            /*foreach (var word in _sentenceItems.Where(item => !(item is Word && item.Lenght == wordLenght && item.IsBeginningByConsonant())).ToList())
+            {
+                
+                if (_sentenceItems.IndexOf(word) != -1)
+                {
+                    int index = _sentenceItems.IndexOf(word);
+                    _sentenceItems.RemoveAt(index);
+                    if (index > 0)
+                    {
+                        _sentenceItems.RemoveAt(index - 1);
+                    }
+                }
+            }*/
+
             // return _sentenceItems
             //     .Where(item => item is Word && item.Lenght == wordLenght && item.IsBeginningByConsonant()).ToList();
         }
