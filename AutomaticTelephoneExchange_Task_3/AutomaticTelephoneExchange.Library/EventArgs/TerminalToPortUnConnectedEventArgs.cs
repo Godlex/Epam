@@ -2,6 +2,6 @@
 {
     public class TerminalToPortUnConnectedEventArgs
     {
-        public string terminalID;
+        public string PortID;
     }
 }

@@ -16,7 +16,12 @@
 
         public void Call(Terminal terminal,string number)
         {
-            terminal.Call();
+            terminal.Call(number);
+        }
+
+        public void EndCall(Terminal terminal)
+        {
+            terminal.EndCall();
         }
     }
 }

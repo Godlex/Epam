@@ -4,7 +4,7 @@
 
     public class TerminalToPortConnectedEventArgs : EventArgs
     {
-        public string terminalID;
-        
+        public string TerminalId;
+        public string PortID;
     }
 }
