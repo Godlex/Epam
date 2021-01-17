@@ -1,10 +1,11 @@
 ﻿namespace AutomaticTelephoneExchange.Libary.EventArgs
 {
     using System;
-    using System.Dynamic;
+    using ATE_Models;
 
-    public class AcceptCallPortToExchangeEventArgs : EventArgs
+    public class CallExchandeToPortEventArgs : EventArgs
     {
         public CallInfo CallInfo;
+        public string PortID;
     }
 }

@@ -4,6 +4,6 @@
 
     public class EndCallTerminalToPortEventArgs : EventArgs
     {
-        
+        public string PhoneNumber;
     }
 }

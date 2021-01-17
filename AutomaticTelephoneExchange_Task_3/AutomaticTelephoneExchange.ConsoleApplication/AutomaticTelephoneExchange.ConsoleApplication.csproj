@@ -6,4 +6,8 @@
     <RootNamespace>AutomaticTelephoneExchange.ConcoleApplication</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutomaticTelephoneExchange.Library\AutomaticTelephoneExchange.Library.csproj" />
+  </ItemGroup>
+
 </Project>

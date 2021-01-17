@@ -1,14 +1,13 @@
-﻿namespace AutomaticTelephoneExchange.Library.ATE_Models
+﻿namespace AutomaticTelephoneExchange.Libary.ATE_Models
 {
     using System;
 
     public class CallInfo
     {
-        public readonly Guid Guid = new Guid();
+        public Guid Guid { get; set; }
         public TimeSpan? Duration { get; set; }
-        public string OutPhoneNumber;
-        public string InPhoneNumber;
-        public DateTime StartCall;
-        
+        public string OutPhoneNumber { get; set; }
+        public string InPhoneNumber { get; set; }
+        public DateTime StartCall { get; set; }
     }
 }

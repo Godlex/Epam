@@ -1,65 +1,44 @@
-﻿namespace AutomaticTelephoneExchange.Library.ATE_Models
+﻿namespace AutomaticTelephoneExchange.Libary.ATE_Models
 {
     using System;
-    using Libary.EventArgs;
+    using EventArgs;
 
     public class Terminal
     {
-        public string id; 
-        public string PhoneNumber { get; }
+        public string Id { get; set; } 
+        public string PhoneNumber { get; set; }
 
-        public Port HPort;
-        
-        public Terminal(string phoneNumber,Port port)
+        public Terminal(string phoneNumber,string id)
         {
+            Id = id;
             PhoneNumber = phoneNumber;
-            HPort = port;
         }
 
-        public void Call(string number)
+        public void Dial(string number)
         {
-            CallInfo callInfo = new CallInfo{Duration = TimeSpan.Zero,InPhoneNumber = PhoneNumber,OutPhoneNumber = number,StartCall = DateTime.Now};
-            HPort.EndTryCallPortToExchangeEventHandler+= HPortOnEndTryCallPortToExchangeEventHandler;
-            HPort.AcceptCallPortToExchangeEventHandler+= HPortOnAcceptCallPortToExchangeEventHandler;
-            CallTerminalToPortEvent(new CallTerminalToPortEventArgs{PhoneNumber = number,CallInfo = callInfo});
+            TryToConnectToPortEvent(new TryToConnectToPortEventArgs{PhoneNumber = PhoneNumber,OutPhone = number});
         }
-
-        private void HPortOnAcceptCallPortToExchangeEventHandler(object? sender, AcceptCallPortToExchangeEventArgs e)
+        public void EndCall()
         {
-            Console.WriteLine("Звонок удался");
-            //логика разговора
+            //logic call ending
+            EndCallTerminalToPortEvent(new EndCallTerminalToPortEventArgs{PhoneNumber = PhoneNumber});//phone uot in 
         }
-
-        private void HPortOnEndTryCallPortToExchangeEventHandler(object? sender, EndTryCallPortToExchangeEventArgs e)
-        {
-            Console.WriteLine("Звонок не удался");
-            HPort.EndTryCallPortToExchangeEventHandler-= HPortOnEndTryCallPortToExchangeEventHandler;
-            HPort.AcceptCallPortToExchangeEventHandler-= HPortOnAcceptCallPortToExchangeEventHandler;
-        }
-
-        public event EventHandler<CallTerminalToPortEventArgs> CallTerminalToPortEventHandler;
-        
-        private void CallTerminalToPortEvent(CallTerminalToPortEventArgs e)
-        {
-            if (CallTerminalToPortEventHandler != null)
-            {
-                CallTerminalToPortEventHandler(this, e);
-            }
-        }
-        
+        public event EventHandler<TryToConnectToPortEventArgs> TryToConnectToPortEventHandler;
         public event EventHandler<EndCallTerminalToPortEventArgs> EndCallTerminalToPortEventHandler;
         
+        private void TryToConnectToPortEvent(TryToConnectToPortEventArgs e)
+        {
+            if (TryToConnectToPortEventHandler != null)
+            {
+                TryToConnectToPortEventHandler(this, e);
+            }
+        }
         private void EndCallTerminalToPortEvent(EndCallTerminalToPortEventArgs e)
         {
             if (EndCallTerminalToPortEventHandler != null)
             {
                 EndCallTerminalToPortEventHandler(this, e);
             }
-        }
-
-        public void EndCall()
-        {
-            EndCallTerminalToPortEvent(new EndCallTerminalToPortEventArgs());
         }
     }
 }

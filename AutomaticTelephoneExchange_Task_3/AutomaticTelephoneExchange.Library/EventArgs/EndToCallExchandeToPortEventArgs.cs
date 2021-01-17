@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class TerminalToPortUnConnectedEventArgs : EventArgs
+    public class EndToCallExchandeToPortEventArgs : EventArgs
     {
         public string PortID;
     }

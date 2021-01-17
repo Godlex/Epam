@@ -2,8 +2,9 @@
 {
     using System;
 
-    public class EndCallPortToExchangeEventArgs : EventArgs
+    public class TryToConnectToPortEventArgs : EventArgs
     {
         public string PhoneNumber;
+        public string OutPhone;
     }
 }

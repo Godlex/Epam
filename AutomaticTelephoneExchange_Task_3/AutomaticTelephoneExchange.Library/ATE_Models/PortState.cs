@@ -1,10 +1,9 @@
-﻿namespace AutomaticTelephoneExchange.Library
+﻿namespace AutomaticTelephoneExchange.Libary.ATE_Models
 {
     public enum PortState
     {
         Connect,
         NotConnect,
-        Disable,
         Busy,
         TerminalNotBind
     }

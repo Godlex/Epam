@@ -1,14 +1,13 @@
-﻿namespace AutomaticTelephoneExchange.Library.ATE_Models
+﻿namespace AutomaticTelephoneExchange.Libary.ATE_Models
 {
     public class Tariff
     {
-        private double _pricePerMinute;
-        private double _subscriptionFee;
-
-        public Tariff(double pricePerMinute,double subscriptionFee)
+        private string _name;
+        public readonly double PricePerMinute;
+        public Tariff(double pricePerMinute, string name)
         {
-            _pricePerMinute = pricePerMinute;
-            _subscriptionFee = subscriptionFee;
+            PricePerMinute = pricePerMinute;
+            _name = name;
         }
     }
 }
