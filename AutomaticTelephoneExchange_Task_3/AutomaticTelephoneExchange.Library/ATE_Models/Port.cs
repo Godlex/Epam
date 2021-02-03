@@ -101,7 +101,7 @@
         {
             if (State == PortState.Connect)
             {
-                Console.WriteLine("Он не подключён!");
+                Console.WriteLine("Он не подключён!");//exeption
             }
             else
             {
