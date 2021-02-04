@@ -1,6 +1,6 @@
 ﻿namespace SalesApplication.BLL
 {
-    public interface ISaleOrderService
+    public interface ISaleInfoProcessor
     {
         
     }

@@ -9,10 +9,10 @@
         public DateTime Date{ get; set; }
 
         [Name("Client")]
-        public ClientModel Client { get; set; }
+        public string Client { get; set; }
         
         [Name("Product")]
-        public ProductModel Product { get; set; }
+        public string Product { get; set; }
         
         [Name("Cost")]
         public double Cost { get; set; }

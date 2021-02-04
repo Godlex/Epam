@@ -3,20 +3,37 @@
     using System.Linq;
     using DAL;
 
-    public class ProductService
+    public class ProductService : IProductService
     {
         //dbcontext
         private readonly OrdersBDContext _context;
 
-        public ProductModel GetById(int id)
+        public ProductService(OrdersBDContext context)
         {
-            return _context.Products.FirstOrDefault(product => product.ProductId == id);
+            _context = context;
+        }
+
+        public ProductModel GetByName(string name)
+        {
+            var product = _context.Products.FirstOrDefault(product => product.Name == name);
+            return product == null ? null : MapProductToProductModel(product);
         }
 
         public int Add(ProductModel productModel)
         {
-            _context.Products.Add(productModel);
-            return productModel.ProductId;
+            var product = MapProductModelToProduct(productModel);
+            _context.Products.Add(product);
+            return product.ProductId;
+        }
+
+        private Product MapProductModelToProduct(ProductModel productModel)
+        {
+            return new Product {Name = productModel.Name, ProductId = productModel.ProductId};
+        }
+        
+        private ProductModel MapProductToProductModel(Product product)
+        {
+            return new ProductModel {Name = product.Name, ProductId = product.ProductId};
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿namespace SalesApplication.BLL
 {
-    public class IProductService
+    public interface IProductService
     {
-        
+        ProductModel GetByName(string name);
+
+        int Add(ProductModel productModel);
     }
 }
