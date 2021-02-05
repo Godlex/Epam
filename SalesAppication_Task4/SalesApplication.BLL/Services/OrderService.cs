@@ -22,20 +22,17 @@
         public void MakeOrder(OrderModel orderModel)
         {
             var productId = CreateProductIfNotExist(orderModel);
-            if (orderModel?.ProductModel != null)
-                orderModel.ProductModel.ProductId = productId;
-            // Client Manager
-            
+            orderModel.ProductId = productId;
+
             var clientId = CreateClientIfNotExist(orderModel);
-            if (orderModel?.ClientModel != null)
-                orderModel.ClientModel.ClientId = clientId;
+            orderModel.ClientId = clientId;
             
             var managerId = CreateManagerIfNotExist(orderModel);
-            if (orderModel?.ManagerModel != null)
-                orderModel.ManagerModel.ManagerId = managerId;
-            
-            
-            _context.Orders.Add(MapOrderModelToOrder(orderModel));
+            orderModel.ManagerId = managerId;
+            orderModel.ManagerModel.ManagerId = managerId;
+
+            var order = MapOrderModelToOrder(orderModel);
+            _context.Orders.Add(order);
             _context.SaveChanges();
         }
         

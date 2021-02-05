@@ -1,23 +1,23 @@
 ﻿namespace SalesApplication.BLL.CSVFileReader
 {
-    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using CsvHelper;
-    using Models;
+    using CsvHelper.Configuration;
 
-    public class CsvFileReader : ICsvFileReader
+    public class CsvFileReader<TMap,TModel> : ICsvFileReader<TMap,TModel>
+        where TModel : class, new() 
+        where TMap : ClassMap<TModel>
     {
-        public IEnumerable<SalesInfo> Read(string filePath)
+        public IEnumerable<TModel> Read(string filePath)
         {
-            Console.WriteLine("Govno rabotaet");
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                csv.Context.RegisterClassMap<SalesInfoMap>();
-                var a = csv.GetRecords<SalesInfo>();
+                csv.Context.RegisterClassMap<TMap>();
+                var a = csv.GetRecords<TModel>();
                 return a.ToList();
             }
         }

@@ -1,10 +1,12 @@
-﻿namespace SalesApplication.BLL
+﻿namespace SalesApplication.BLL.CSVFileReader
 {
     using System.Collections.Generic;
-    using Models;
+    using CsvHelper.Configuration;
 
-    public interface ICsvFileReader
+    public interface ICsvFileReader<TMap,TModel>
+    where TModel : class, new() 
+    where TMap : ClassMap<TModel>
     {
-        IEnumerable<SalesInfo> Read(string filePath);
+        IEnumerable<TModel> Read(string filePath);
     }
 }

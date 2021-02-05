@@ -12,9 +12,8 @@
             _orderService = orderService;
         }
 
-        public void Processes(IEnumerable<SalesInfo> salesInfos,string fileName)
+        public void Processes(IEnumerable<SalesInfo> salesInfos,string managerSecondName)
         {
-            string managerSecondName = fileName[..^13];
             foreach (var sale in salesInfos)
             {
                 _orderService.MakeOrder(new OrderModel
