@@ -1,17 +1,31 @@
-﻿namespace SalesApplication.ConsoleApplication
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+
+namespace SalesApplication.WorkerService
 {
-    using System;
     using System.Configuration;
-    using System.Threading;
     using BLL;
     using BLL.CSVFileReader;
     using BLL.Models;
     using BLL.Services;
+    using ConsoleApplication;
     using DAL;
 
-    class Program
+    public class Worker : BackgroundService
     {
-        static void Main(string[] args)
+        private readonly ILogger<Worker> _logger;
+
+        public Worker(ILogger<Worker> logger)
+        {
+            _logger = logger;
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             try
             {
@@ -20,15 +34,11 @@
                 using (FileWatcher fileWatcher = new FileWatcher(new CsvFileReader<SalesInfoMap, SalesInfo>(), path,
                     new SaleInfoProcessor(new OrderService(ordersBdContext, new ProductService(ordersBdContext),
                         new ClientService(ordersBdContext), new ManagerService(ordersBdContext)))))
-                {
                     fileWatcher.StartWatching();
-                    Thread.Sleep(5000);
-                    fileWatcher.StopWatching();
-                }
             }
             catch(Exception e)
             {
-                Console.WriteLine(e);
+                _logger.LogError(e, " error ");
             }
         }
     }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Threading.Tasks;
     using BLL;
     using BLL.CSVFileReader;
     using BLL.FileWatcher;
@@ -50,7 +51,7 @@
         {
             var saleInfos = _fileReader.Read(e.FullPath);
             var managerSecondName = GetManagerSecondNameFromFileName(e.Name);
-            _saleInfoProcessor.Processes(saleInfos,managerSecondName);
+            Task.Factory.StartNew(() =>_saleInfoProcessor.Processes(saleInfos,managerSecondName));
         }
 
         private string GetManagerSecondNameFromFileName(string fileName)

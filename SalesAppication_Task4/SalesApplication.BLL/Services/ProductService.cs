@@ -23,6 +23,7 @@
         {
             var product = MapProductModelToProduct(productModel);
             _context.Products.Add(product);
+            _context.SaveChanges();
             return product.ProductId;
         }
 

@@ -23,6 +23,7 @@
         {
             var client = MapClientModelToClient(clientModel);
             _context.Clients.Add(client);
+            _context.SaveChanges();
             return client.ClientId;
         }
 

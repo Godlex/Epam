@@ -11,7 +11,8 @@
         private readonly IClientService _clientService;
         private readonly IManagerService _managerService;
 
-        public OrderService(OrdersBDContext context, IProductService productService, IClientService clientService, IManagerService managerService)
+        public OrderService(OrdersBDContext context, IProductService productService, IClientService clientService,
+            IManagerService managerService)
         {
             _context = context;
             _productService = productService;
@@ -26,16 +27,15 @@
 
             var clientId = CreateClientIfNotExist(orderModel);
             orderModel.ClientId = clientId;
-            
+
             var managerId = CreateManagerIfNotExist(orderModel);
             orderModel.ManagerId = managerId;
-            orderModel.ManagerModel.ManagerId = managerId;
 
             var order = MapOrderModelToOrder(orderModel);
             _context.Orders.Add(order);
             _context.SaveChanges();
         }
-        
+
         private int CreateManagerIfNotExist(OrderModel orderModel) //Manager
         {
             var manager = _managerService.GetByName(orderModel?.ManagerModel?.SecondName);
@@ -45,7 +45,7 @@
 
             return managerId;
         }
-        
+
         private int CreateClientIfNotExist(OrderModel orderModel) //Client
         {
             var client = _clientService.GetByName(orderModel?.ClientModel?.Name);
@@ -71,14 +71,13 @@
         {
             return new Order
             {
-                Client = new Client {ClientId = orderModel.ClientId, Name = orderModel.ClientModel.Name},
-                ClientId = orderModel.ClientId, Cost = orderModel.Cost, Date = orderModel.Date,
-                Manager = new Manager
-                    {ManagerId = orderModel.ManagerId, SecondName = orderModel.ManagerModel.SecondName},
-                ManagerId = orderModel.ManagerId, OrderId = orderModel.OrderId,
-                Product = new Product {Name = orderModel.ProductModel.Name, ProductId = orderModel.ProductId},
+                ClientId = orderModel.ClientId,
+                Cost = orderModel.Cost,
+                Date = orderModel.Date,
+                ManagerId = orderModel.ManagerId,
+                OrderId = orderModel.OrderId,
                 ProductId = orderModel.ProductId
             };
         }
-        }
     }
+}
