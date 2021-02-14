@@ -36,7 +36,7 @@
             _context.SaveChanges();
         }
 
-        private int CreateManagerIfNotExist(OrderModel orderModel) // generic roolback 
+        private int CreateManagerIfNotExist(OrderModel orderModel) //Manager
         {
             var manager = _managerService.GetByName(orderModel?.ManagerModel?.SecondName);
             if (manager != null) return manager.ManagerId;

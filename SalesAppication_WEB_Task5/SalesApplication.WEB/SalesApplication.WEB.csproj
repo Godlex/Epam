@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <UserSecretsId>aspnet-SalesApplication.WEB-1F200FBE-938D-4B59-86E6-20C43D36435B</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>
