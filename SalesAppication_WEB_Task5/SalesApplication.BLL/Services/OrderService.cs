@@ -6,12 +6,12 @@
 
     public class OrderService : IOrderService
     {
-        private readonly OrdersBDContext _context;
+        private readonly OrdersDbContext _context;
         private readonly IProductService _productService;
         private readonly IClientService _clientService;
         private readonly IManagerService _managerService;
 
-        public OrderService(OrdersBDContext context, IProductService productService, IClientService clientService,
+        public OrderService(OrdersDbContext context, IProductService productService, IClientService clientService,
             IManagerService managerService)
         {
             _context = context;

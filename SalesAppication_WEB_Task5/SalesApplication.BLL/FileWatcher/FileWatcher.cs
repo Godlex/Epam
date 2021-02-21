@@ -58,7 +58,7 @@
         {
             if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException(nameof(fileName));
             const int redundantSymbol = 13;
-            return fileName[..^redundantSymbol];
+            return fileName.Substring(0,fileName.Length-redundantSymbol); // переписать 
 
         }
         public void Dispose()

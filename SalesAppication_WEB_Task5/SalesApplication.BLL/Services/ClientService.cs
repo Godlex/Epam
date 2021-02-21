@@ -6,16 +6,16 @@
 
     public class ClientService : IClientService
     {
-        private readonly OrdersBDContext _context;
+        private readonly OrdersDbContext _context;
 
-        public ClientService(OrdersBDContext context)
+        public ClientService(OrdersDbContext context)
         {
             _context = context;
         }
 
         public ClientModel GetByName(string name)
         {
-            var client = _context.Clients.FirstOrDefault(client =>client.Name == name);
+            var client = _context.Clients.FirstOrDefault(c =>c.Name == name);
             return client == null ? null : MapClientToClientModel(client);
         }
 

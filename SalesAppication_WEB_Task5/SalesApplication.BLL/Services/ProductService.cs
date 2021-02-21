@@ -6,16 +6,16 @@
     public class ProductService : IProductService
     {
         //dbcontext
-        private readonly OrdersBDContext _context;
+        private readonly OrdersDbContext _context;
 
-        public ProductService(OrdersBDContext context)
+        public ProductService(OrdersDbContext context)
         {
             _context = context;
         }
 
         public ProductModel GetByName(string name)
         {
-            var product = _context.Products.FirstOrDefault(product => product.Name == name);
+            var product = _context.Products.FirstOrDefault(p => p.Name == name);
             return product == null ? null : MapProductToProductModel(product);
         }
 

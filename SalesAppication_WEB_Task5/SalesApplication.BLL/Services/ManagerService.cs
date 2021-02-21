@@ -5,9 +5,9 @@
 
     public class ManagerService : IManagerService
     {
-        private readonly OrdersBDContext _context;
+        private readonly OrdersDbContext _context;
 
-        public ManagerService(OrdersBDContext context)
+        public ManagerService(OrdersDbContext context)
         {
             _context = context;
         }

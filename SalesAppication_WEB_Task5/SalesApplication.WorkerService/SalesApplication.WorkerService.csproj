@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <UserSecretsId>dotnet-SalesApplication.WorkerService-190E3E41-3C9E-40F8-BF33-BCB31F44A3EB</UserSecretsId>
   </PropertyGroup>
 
@@ -16,5 +16,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SalesApplication.BLL\SalesApplication.BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
 </Project>

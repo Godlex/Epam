@@ -30,10 +30,10 @@ namespace SalesApplication.WorkerService
             try
             {
                 string path = ConfigurationManager.AppSettings["SaleInfoDirPath"];
-                OrdersBDContext ordersBdContext = new OrdersBDContext("SalesDB");
+                OrdersDbContext ordersDbContext = new OrdersDbContext("SalesDB");
                 using (FileWatcher fileWatcher = new FileWatcher(new CsvFileReader<SalesInfoMap, SalesInfo>(), path,
-                    new SaleInfoProcessor(new OrderService(ordersBdContext, new ProductService(ordersBdContext),
-                        new ClientService(ordersBdContext), new ManagerService(ordersBdContext)))))
+                    new SaleInfoProcessor(new OrderService(ordersDbContext, new ProductService(ordersDbContext),
+                        new ClientService(ordersDbContext), new ManagerService(ordersDbContext)))))
                     fileWatcher.StartWatching();
             }
             catch(Exception e)
