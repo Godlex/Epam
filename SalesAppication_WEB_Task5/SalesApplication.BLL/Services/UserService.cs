@@ -3,29 +3,38 @@
     using System.Linq;
     using DAL;
     using DAL.Entities;
+    using Models;
 
     public class UserService : IUserService
     {
         private readonly OrdersDbContext _context;
-
-        public UserService(OrdersDbContext context)
+        
+        public UserService(string connectionString)
         {
-            _context = context;
+            _context = new OrdersDbContext(connectionString);
         }
 
-        public User GetByEMail(string email)
+        public UserModel GetByEMail(string email)
         {
-            return _context.Users.FirstOrDefault(user => user.Email == email);
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            return MapUserToUserModel(user);
         }
         
-        public User GetByEMailAndPassword(string email, string password)
+        public UserModel GetByEMailAndPassword(string email, string password)
         {
-            return _context.Users.FirstOrDefault(user => user.Email == email && user.Password == password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            return MapUserToUserModel(user);
         }
-        public void Add(string email, string password)
+        public void Add(UserModel userModel)
         {
-            _context.Users.Add(new User{Email = email,Password = password});
+            _context.Users.Add(new User{Email = userModel.Email,Password = userModel.Password});
             _context.SaveChanges();
+        }
+
+        private UserModel MapUserToUserModel(User user)
+        {
+            if (user == null) return null;
+            return new UserModel {Email = user.Email, Password = user.Password};
         }
     }
 }

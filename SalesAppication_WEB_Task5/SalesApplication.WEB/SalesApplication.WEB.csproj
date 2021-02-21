@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
     <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <SchemaVersion>2.0</SchemaVersion>
-        <ProjectGuid>{018B97FA-EFBB-4C2F-B02E-47CD8E04C3A0}</ProjectGuid>
+        <ProjectGuid>{3F7BCAE9-117E-4BD3-8CEE-5CDD4A1154AF}</ProjectGuid>
         <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -42,6 +43,14 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+          <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="Microsoft.CSharp" />
         <Reference Include="System" />
         <Reference Include="System.Data" />
@@ -160,8 +169,6 @@
         <Content Include="Views\_ViewStart.cshtml" />
         <Content Include="Views\Shared\Error.cshtml" />
         <Content Include="Views\Shared\_Layout.cshtml" />
-        <Content Include="Views\Home\About.cshtml" />
-        <Content Include="Views\Home\Contact.cshtml" />
         <Content Include="Views\Home\Index.cshtml" />
     </ItemGroup>
     <ItemGroup>
@@ -185,10 +192,6 @@
         <Project>{af8f41cb-b88f-4ba4-be2c-06ff29eb4d8f}</Project>
         <Name>SalesApplication.BLL</Name>
       </ProjectReference>
-      <ProjectReference Include="..\SalesApplication.DAL\SalesApplication.DAL.csproj">
-        <Project>{97c93bbe-324e-4a15-99d8-73a5417b2ea1}</Project>
-        <Name>SalesApplication.DAL</Name>
-      </ProjectReference>
     </ItemGroup>
     <PropertyGroup>
         <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -205,9 +208,9 @@
                 <WebProjectProperties>
                     <UseIIS>True</UseIIS>
                     <AutoAssignPort>True</AutoAssignPort>
-                    <DevelopmentServerPort>5000</DevelopmentServerPort>
+                    <DevelopmentServerPort>8080</DevelopmentServerPort>
                     <DevelopmentServerVPath>/</DevelopmentServerVPath>
-                    <IISUrl>http://localhost:5000/</IISUrl>
+                    <IISUrl>http://localhost:8080/</IISUrl>
                     <NTLMAuthentication>False</NTLMAuthentication>
                     <UseCustomServer>False</UseCustomServer>
                     <CustomServerUrl />
@@ -221,7 +224,10 @@
             <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
         </PropertyGroup>
         <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+        <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+        <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     </Target>
+    <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">

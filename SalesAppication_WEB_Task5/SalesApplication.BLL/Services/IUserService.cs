@@ -1,12 +1,13 @@
 ﻿namespace SalesApplication.BLL.Services
 {
     using DAL.Entities;
+    using Models;
 
     public interface IUserService
     {
-        User GetByEMail(string email);
-        User GetByEMailAndPassword(string email, string password);
+        UserModel GetByEMail(string email);
+        UserModel GetByEMailAndPassword(string email, string password);
         
-        void Add(string email, string password);
+        void Add(UserModel userModel);
     }
 }

@@ -1,19 +1,19 @@
 ﻿namespace SalesApplication.WEB.Controllers
 {
+    using System.Configuration;
     using System.Web.Mvc;
     using System.Web.Security;
     using BLL.Models;
     using BLL.Services;
-    using DAL.Entities;
     using Models;
 
     public class AccountController : Controller
     {
         private readonly UserService _userService;
         
-        public AccountController(UserService userService)
+        public AccountController()
         {
-            _userService = userService;
+            _userService = new UserService("SalesDB");
         }
         public ActionResult Login()
         {
@@ -26,7 +26,7 @@
         {
             if (ModelState.IsValid)
             {
-                User user = null;
+                UserModel user = null;
                 
                 //Serach User on db
 
@@ -56,14 +56,14 @@
         {
             if(ModelState.IsValid)
             {
-                User user = null;
+                UserModel user = null;
                 
                 user = _userService.GetByEMail(model.Name);
                 
                 if (user == null)
                 {
                     // создаем нового пользователя
-                    _userService.Add(model.Name,model.Password);
+                    _userService.Add(new UserModel{Email = model.Name,Password = model.Password});
                     user = _userService.GetByEMailAndPassword(model.Name, model.Password);
                     // если пользователь удачно добавлен в бд
                     if (user != null)
