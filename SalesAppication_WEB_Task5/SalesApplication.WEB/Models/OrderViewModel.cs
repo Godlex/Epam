@@ -1,20 +1,20 @@
-﻿namespace SalesApplication.DAL.Entities
+﻿namespace SalesApplication.WEB.Models
 {
     using System;
 
-    public class Order
+    public class OrderViewModel
     {
         public int OrderId { get; set; } 
         public DateTime Date { get; set; }
         public double Cost { get; set; }
         
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public ProductViewModel Product { get; set; }
         
         public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public ClientViewModel Client { get; set; }
         
         public int ManagerId { get; set; }
-        public Manager Manager { get; set; }
+        public ManagerViewModel Manager { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿namespace SalesApplication.BLL.Models
 {
     using System;
-    using CsvHelper.Configuration.Attributes;
 
     public class SalesInfo
     {

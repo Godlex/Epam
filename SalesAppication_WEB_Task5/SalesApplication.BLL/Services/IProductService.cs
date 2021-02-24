@@ -1,5 +1,7 @@
-﻿namespace SalesApplication.BLL
+﻿namespace SalesApplication.BLL.Services
 {
+    using Models;
+
     public interface IProductService
     {
         ProductModel GetByName(string name);

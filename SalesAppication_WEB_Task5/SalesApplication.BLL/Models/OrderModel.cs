@@ -1,4 +1,4 @@
-﻿namespace SalesApplication.BLL
+﻿namespace SalesApplication.BLL.Models
 {
     using System;
 

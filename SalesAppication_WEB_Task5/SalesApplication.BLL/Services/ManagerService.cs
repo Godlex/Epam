@@ -2,14 +2,16 @@
 {
     using System.Linq;
     using DAL;
+    using DAL.Entities;
+    using Models;
 
     public class ManagerService : IManagerService
     {
         private readonly OrdersDbContext _context;
 
-        public ManagerService(OrdersDbContext context)
+        public ManagerService(string connectionString)//connectionString
         {
-            _context = context;
+            _context = new OrdersDbContext(connectionString);
         }
 
         public ManagerModel GetByName(string name)

@@ -1,6 +1,6 @@
-﻿namespace SalesApplication.BLL.Models
+﻿namespace SalesApplication.WEB.Models
 {
-    public class ClientModel
+    public class ClientViewModel
     {
         public int ClientId { get; set; }
         public string Name { get; set; }

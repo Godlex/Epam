@@ -1,16 +1,18 @@
-﻿namespace SalesApplication.BLL
+﻿namespace SalesApplication.BLL.Services
 {
     using System.Linq;
     using DAL;
+    using DAL.Entities;
+    using Models;
 
     public class ProductService : IProductService
     {
         //dbcontext
         private readonly OrdersDbContext _context;
 
-        public ProductService(OrdersDbContext context)
+        public ProductService(string connectionString)//connectionString
         {
-            _context = context;
+            _context = new OrdersDbContext(connectionString);
         }
 
         public ProductModel GetByName(string name)

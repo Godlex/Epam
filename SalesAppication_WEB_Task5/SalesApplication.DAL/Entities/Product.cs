@@ -1,4 +1,4 @@
-﻿namespace SalesApplication.DAL
+﻿namespace SalesApplication.DAL.Entities
 {
     public class Product
     {

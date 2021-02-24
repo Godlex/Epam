@@ -1,7 +1,8 @@
-﻿namespace SalesApplication.BLL.Services
+﻿namespace SalesApplication.BLL.SaleInfoProcessor
 {
     using System.Collections.Generic;
     using Models;
+    using Services;
 
     public class SaleInfoProcessor : ISaleInfoProcessor
     {

@@ -1,4 +1,4 @@
-﻿namespace SalesApplication.BLL
+﻿namespace SalesApplication.BLL.SaleInfoProcessor
 {
     using System.Collections.Generic;
     using Models;

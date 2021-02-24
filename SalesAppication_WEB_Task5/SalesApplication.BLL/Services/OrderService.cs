@@ -1,8 +1,9 @@
-﻿namespace SalesApplication.BLL
+﻿namespace SalesApplication.BLL.Services
 {
+    using System.Collections.Generic;
     using DAL;
     using DAL.Entities;
-    using Services;
+    using Models;
 
     public class OrderService : IOrderService
     {
@@ -11,13 +12,12 @@
         private readonly IClientService _clientService;
         private readonly IManagerService _managerService;
 
-        public OrderService(OrdersDbContext context, IProductService productService, IClientService clientService,
-            IManagerService managerService)
+        public OrderService(string connectionString) // connectionSrting
         {
-            _context = context;
-            _productService = productService;
-            _clientService = clientService;
-            _managerService = managerService;
+            _context = new OrdersDbContext(connectionString);
+            _productService = new ProductService(connectionString);
+            _clientService = new ClientService(connectionString);
+            _managerService =new ManagerService(connectionString);
         }
 
         public void MakeOrder(OrderModel orderModel)
@@ -34,6 +34,16 @@
             var order = MapOrderModelToOrder(orderModel);
             _context.Orders.Add(order);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<OrderModel> GetOrders()
+        {
+            IList<OrderModel> orderModels = new List<OrderModel>();
+            foreach (var order in _context.Orders)
+            {
+                orderModels.Add(MapOrderToOrderModel(order));
+            }
+            return orderModels;
         }
 
         private int CreateManagerIfNotExist(OrderModel orderModel) //Manager
@@ -66,7 +76,20 @@
 
             return productId;
         }
-
+        
+        private OrderModel MapOrderToOrderModel(Order order)
+        {
+            return new OrderModel
+            {
+                ClientId = order.ClientId,
+                Cost = order.Cost,
+                Date = order.Date,
+                ManagerId = order.ManagerId,
+                OrderId = order.OrderId,
+                ProductId = order.ProductId
+            };
+        }
+        
         private Order MapOrderModelToOrder(OrderModel orderModel)
         {
             return new Order
@@ -79,7 +102,5 @@
                 ProductId = orderModel.ProductId
             };
         }
-        //Enumerable<OrderModel> GetOrders()
-        
     }
 }

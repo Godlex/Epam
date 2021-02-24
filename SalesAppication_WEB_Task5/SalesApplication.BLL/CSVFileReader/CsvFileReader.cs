@@ -17,8 +17,8 @@
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
                 csv.Context.RegisterClassMap<TMap>();
-                var a = csv.GetRecords<TModel>();
-                return a.ToList();
+                var models = csv.GetRecords<TModel>();
+                return models.ToList();
             }
         }
     }

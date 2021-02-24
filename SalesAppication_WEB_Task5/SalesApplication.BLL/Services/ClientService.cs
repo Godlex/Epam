@@ -3,14 +3,15 @@
     using System.Linq;
     using DAL;
     using DAL.Entities;
+    using Models;
 
     public class ClientService : IClientService
     {
         private readonly OrdersDbContext _context;
 
-        public ClientService(OrdersDbContext context)
+        public ClientService(string connectionString)//connectionString
         {
-            _context = context;
+            _context = new OrdersDbContext(connectionString);
         }
 
         public ClientModel GetByName(string name)

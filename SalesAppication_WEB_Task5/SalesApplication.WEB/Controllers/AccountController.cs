@@ -1,6 +1,5 @@
 ﻿namespace SalesApplication.WEB.Controllers
 {
-    using System.Configuration;
     using System.Web.Mvc;
     using System.Web.Security;
     using BLL.Models;

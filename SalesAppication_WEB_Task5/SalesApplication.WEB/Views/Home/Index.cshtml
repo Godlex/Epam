@@ -1,3 +1,57 @@
-﻿@{
+﻿@model IEnumerable<SalesApplication.WEB.Models.OrderViewModel>
+@{
     ViewBag.Title = "Home Page";
 }
+
+<h2>Table</h2>
+
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.OrderId)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.Client)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manager.SecondName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manager.SecondName)
+            </td>
+            <td>
+                @Html.ActionLink("Order", "MakeOrder", new {id = item.OrderId})
+            </td>
+        </tr>
+    }
+</table>
