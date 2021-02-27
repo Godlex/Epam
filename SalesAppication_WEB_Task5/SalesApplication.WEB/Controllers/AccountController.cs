@@ -25,12 +25,10 @@
         {
             if (ModelState.IsValid)
             {
-                UserModel user = null;
-                
                 //Serach User on db
 
-                user = _userService.GetByEMail(model.Name);
-                
+                var user = _userService.GetByEMail(model.Name);
+
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Name, true);
@@ -83,7 +81,7 @@
  
             return View(model);
         }
-        public ActionResult Logoff()
+        public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");

@@ -18,7 +18,6 @@
             try
             {
                 string path = ConfigurationManager.AppSettings["SaleInfoDirPath"];
-                OrdersDbContext ordersDbContext = new OrdersDbContext("SalesDB");
                 using (FileWatcher fileWatcher = new FileWatcher(new CsvFileReader<SalesInfoMap, SalesInfo>(), path,
                     new SaleInfoProcessor(new OrderService("SalesDB"))))
                 {

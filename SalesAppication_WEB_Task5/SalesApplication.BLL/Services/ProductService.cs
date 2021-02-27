@@ -1,5 +1,6 @@
 ﻿namespace SalesApplication.BLL.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
     using DAL;
     using DAL.Entities;
@@ -27,6 +28,15 @@
             _context.Products.Add(product);
             _context.SaveChanges();
             return product.ProductId;
+        }
+        public IEnumerable<ProductModel> GetProducts()
+        {
+            IList<ProductModel> productModels = new List<ProductModel>();
+            foreach (var product in _context.Products)
+            {
+                productModels.Add(MapProductToProductModel(product));
+            }
+            return productModels;
         }
 
         private Product MapProductModelToProduct(ProductModel productModel)

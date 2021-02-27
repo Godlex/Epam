@@ -1,6 +1,5 @@
 ﻿namespace SalesApplication.BLL.Services
 {
-    using DAL.Entities;
     using Models;
 
     public interface IUserService

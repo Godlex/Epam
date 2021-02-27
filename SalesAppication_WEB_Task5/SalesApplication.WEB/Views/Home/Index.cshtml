@@ -3,13 +3,31 @@
     ViewBag.Title = "Home Page";
 }
 
-<h2>Table</h2>
+<h2>List of Orders</h2>
+<div>
+    @Html.ActionLink("Make Order", "MakeOrder")
+</div>
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Manager: </label>
+        @Html.DropDownList("manager", ViewBag.Managers as SelectList,
+            htmlAttributes: new {@class = "control-label col-md-2"})
+
+        <label class="control-label">Client: </label>
+        @Html.DropDownList("client",ViewBag.Clients as SelectList,
+            htmlAttributes: new {@class = "control-label col-md-2"})
+
+        <label class="control-label">Product: </label>
+        @Html.DropDownList("product", ViewBag.Products as SelectList,
+            htmlAttributes: new {@class = "control-label col-md-2"})
+
+        <input type="submit" value="accept" class="btn btn-default"/>
+    </div>
+</form>
 
 <table class="table">
     <tr>
-        <td>
-            @Html.DisplayNameFor(model => model.OrderId)
-        </td>
         <th>
             @Html.DisplayNameFor(model => model.Client)
         </th>
@@ -23,7 +41,7 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Manager.SecondName)
+            @Html.DisplayNameFor(model => model.Manager)
         </th>
         <th></th>
     </tr>
@@ -32,13 +50,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderId)
+                @Html.DisplayFor(modelItem => item.Client)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
+                @Html.DisplayFor(modelItem => item.Product)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
@@ -47,10 +62,7 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Manager.SecondName)
-            </td>
-            <td>
-                @Html.ActionLink("Order", "MakeOrder", new {id = item.OrderId})
+                @Html.DisplayFor(modelItem => item.Manager)
             </td>
         </tr>
     }

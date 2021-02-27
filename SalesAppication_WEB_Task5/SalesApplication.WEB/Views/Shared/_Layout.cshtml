@@ -23,7 +23,10 @@
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Logoff", "Logoff", "Account")</li>
+                    <li>@Html.ActionLink("Managers", "Index", "Manager")</li>
+                    <li>@Html.ActionLink("Clients", "Index", "Client")</li>
+                    <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                    <li>@Html.ActionLink("Log out", "LogOut", "Account")</li>
                 }
                 else
                 {
@@ -37,7 +40,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; @DateTime.Now.2021 - My ASP.NET Application</p>
+        <p>&copy; Create by Godlex</p>
     </footer>
 </div>
 

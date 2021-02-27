@@ -3,6 +3,6 @@
     public class ManagerViewModel
     {
         public int ManagerId { get; set; }
-        public string SecondName { get; set; }
+        public string Manager { get; set; }
     }
 }

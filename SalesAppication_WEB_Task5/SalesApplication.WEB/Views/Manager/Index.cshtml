@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SalesApplication.WEB.Models.ManagerViewModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>List of Managers</h2>
+<div>
+    @Html.ActionLink("New Manager", "NewManager")
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Manager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagerId)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagerId)
+            </td>
+        </tr>
+    }
+</table>

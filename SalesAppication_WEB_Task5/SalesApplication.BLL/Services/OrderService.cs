@@ -1,6 +1,7 @@
 ﻿namespace SalesApplication.BLL.Services
 {
     using System.Collections.Generic;
+    using System.Linq;
     using DAL;
     using DAL.Entities;
     using Models;
@@ -8,75 +9,46 @@
     public class OrderService : IOrderService
     {
         private readonly OrdersDbContext _context;
-        private readonly IProductService _productService;
-        private readonly IClientService _clientService;
-        private readonly IManagerService _managerService;
 
-        public OrderService(string connectionString) // connectionSrting
+        public OrderService(string connectionString) 
         {
             _context = new OrdersDbContext(connectionString);
-            _productService = new ProductService(connectionString);
-            _clientService = new ClientService(connectionString);
-            _managerService =new ManagerService(connectionString);
         }
 
         public void MakeOrder(OrderModel orderModel)
         {
-            var productId = CreateProductIfNotExist(orderModel);
-            orderModel.ProductId = productId;
-
-            var clientId = CreateClientIfNotExist(orderModel);
-            orderModel.ClientId = clientId;
-
-            var managerId = CreateManagerIfNotExist(orderModel);
-            orderModel.ManagerId = managerId;
-
             var order = MapOrderModelToOrder(orderModel);
             _context.Orders.Add(order);
             _context.SaveChanges();
         }
 
-        public IEnumerable<OrderModel> GetOrders()
+        public IEnumerable<OrderModel> GetOrders(int? manager, int? client, int? product)
         {
+            IQueryable<Order> orders = _context.Orders.Include("Client").Include("Manager").Include("Product");
+            if (manager != null && manager != 0)
+            {
+                orders = orders.Where(x => x.ManagerId == manager.Value);
+            }
+
+            if (client != null && client != 0)
+            {
+                orders = orders.Where(x => x.ClientId == client.Value);
+            }
+
+            if (product != null && product != 0)
+            {
+                orders = orders.Where(x => x.ProductId == product.Value);
+            }
+
             IList<OrderModel> orderModels = new List<OrderModel>();
-            foreach (var order in _context.Orders)
+            foreach (var order in orders)
             {
                 orderModels.Add(MapOrderToOrderModel(order));
             }
+
             return orderModels;
         }
 
-        private int CreateManagerIfNotExist(OrderModel orderModel) //Manager
-        {
-            var manager = _managerService.GetByName(orderModel?.ManagerModel?.SecondName);
-            if (manager != null) return manager.ManagerId;
-
-            var managerId = _managerService.Add(new ManagerModel {SecondName = orderModel?.ManagerModel?.SecondName});
-
-            return managerId;
-        }
-
-        private int CreateClientIfNotExist(OrderModel orderModel) //Client
-        {
-            var client = _clientService.GetByName(orderModel?.ClientModel?.Name);
-            if (client != null) return client.ClientId;
-
-            var clientId = _clientService.Add(new ClientModel {Name = orderModel?.ClientModel?.Name});
-
-            return clientId;
-        }
-
-
-        private int CreateProductIfNotExist(OrderModel orderModel)
-        {
-            var product = _productService.GetByName(orderModel?.ProductModel?.Name);
-            if (product != null) return product.ProductId;
-
-            var productId = _productService.Add(new ProductModel {Name = orderModel?.ProductModel?.Name});
-
-            return productId;
-        }
-        
         private OrderModel MapOrderToOrderModel(Order order)
         {
             return new OrderModel
@@ -86,10 +58,13 @@
                 Date = order.Date,
                 ManagerId = order.ManagerId,
                 OrderId = order.OrderId,
-                ProductId = order.ProductId
+                ProductId = order.ProductId,
+                ClientModel = new ClientModel {Name = order.Client.Name},
+                ProductModel = new ProductModel {Name = order.Product.Name},
+                ManagerModel = new ManagerModel {SecondName = order.Manager.SecondName}
             };
         }
-        
+
         private Order MapOrderModelToOrder(OrderModel orderModel)
         {
             return new Order

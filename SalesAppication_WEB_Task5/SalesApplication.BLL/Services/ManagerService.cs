@@ -1,5 +1,6 @@
 ﻿namespace SalesApplication.BLL.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
     using DAL;
     using DAL.Entities;
@@ -9,7 +10,7 @@
     {
         private readonly OrdersDbContext _context;
 
-        public ManagerService(string connectionString)//connectionString
+        public ManagerService(string connectionString)
         {
             _context = new OrdersDbContext(connectionString);
         }
@@ -26,6 +27,15 @@
             _context.Managers.Add(manager);
             _context.SaveChanges();
             return manager.ManagerId;
+        }
+        public IEnumerable<ManagerModel> GetManagers()
+        {
+            IList<ManagerModel> managerModels = new List<ManagerModel>();
+            foreach (var manager in _context.Managers)
+            {
+                managerModels.Add(MapManagerToManagerModel(manager));
+            }
+            return managerModels;
         }
 
         private Manager MapManagerModelToManager(ManagerModel managerModel)
