@@ -13,9 +13,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Manager)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManagerId)
-        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -23,9 +20,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Manager)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManagerId)
             </td>
         </tr>
     }
