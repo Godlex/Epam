@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using BLL.Models;
     using BLL.Services;
+    using Constants;
     using Models;
 
     public class ClientController : Controller
@@ -13,8 +14,10 @@
 
         public ClientController()
         {
-            _clientService = new ClientService("SalesDB");
+            _clientService = new ClientService(WebConstants.ConnectionString);
         }
+        [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             List<ClientViewModel> clientViewModels = new List<ClientViewModel>();
@@ -22,24 +25,21 @@
             {
                 clientViewModels.Add(MapClientModelToClientViewModel(orderModel));
             }
+
             return View(clientViewModels);
         }
 
-        private ClientViewModel MapClientModelToClientViewModel(ClientModel orderModel)
-        {
-            return new ClientViewModel
-            {
-                Name = orderModel.Name
-            };
-        }
-
+        [HttpGet]
+        [Authorize(Roles = WebConstants.AdminRole)]
         public ActionResult NewClient()
         {
             CreateClientViewModel createClientViewModel = new CreateClientViewModel();
             return View(createClientViewModel);
         }
 
+        [Authorize(Roles = WebConstants.AdminRole)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult NewClient(CreateClientViewModel client)
         {
             try
@@ -48,13 +48,22 @@
                 {
                     Name = client.Name,
                 });
-                return Redirect("/Client/Index");
+                return RedirectToAction("Index", "Client");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("",ex.Message);
+                ModelState.AddModelError("", ex.Message);
             }
+
             return View();
+        }
+
+        private ClientViewModel MapClientModelToClientViewModel(ClientModel orderModel)
+        {
+            return new ClientViewModel
+            {
+                Name = orderModel.Name
+            };
         }
     }
 }

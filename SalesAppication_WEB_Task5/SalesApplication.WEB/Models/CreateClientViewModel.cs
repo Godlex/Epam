@@ -4,7 +4,7 @@
 
     public class CreateClientViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter a valid Name")]
         public string Name { get; set; }
     }
 }

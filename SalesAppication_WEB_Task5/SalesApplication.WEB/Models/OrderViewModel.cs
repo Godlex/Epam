@@ -1,7 +1,6 @@
 ﻿namespace SalesApplication.WEB.Models
 {
     using System;
-    using System.Web.Mvc;
 
     public class OrderViewModel
     {

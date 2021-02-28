@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using BLL.Models;
     using BLL.Services;
+    using Constants;
     using Models;
 
     public class ProductController : Controller
@@ -13,9 +14,10 @@
 
         public ProductController()
         {
-            _productService = new ProductService("SalesDB");
+            _productService = new ProductService(WebConstants.ConnectionString);
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             List<ProductViewModel> productViewModels = new List<ProductViewModel>();
@@ -27,6 +29,8 @@
             return View(productViewModels);
         }
 
+        [HttpGet]
+        [Authorize(Roles = WebConstants.AdminRole)]
         public ActionResult NewProduct()
         {
             CreateProductViewModel createProductViewModel = new CreateProductViewModel();
@@ -34,6 +38,8 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = WebConstants.AdminRole)]
+        [ValidateAntiForgeryToken]
         public ActionResult NewProduct(CreateProductViewModel product)
         {
             try
@@ -42,7 +48,7 @@
                 {
                     Name = product.Name
                 });
-                return Redirect("/Product/Index");
+                return RedirectToAction("Index", "Product");
             }
             catch (Exception ex)
             {

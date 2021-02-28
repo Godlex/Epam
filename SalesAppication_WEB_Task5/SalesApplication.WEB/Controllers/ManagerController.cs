@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using BLL.Models;
     using BLL.Services;
+    using Constants;
     using Models;
 
     public class ManagerController : Controller
@@ -13,8 +14,10 @@
 
         public ManagerController()
         {
-            _managerService = new ManagerService("SalesDB");
+            _managerService = new ManagerService(WebConstants.ConnectionString);
         }
+
+        [HttpGet]
         public ActionResult Index()
         {
             List<ManagerViewModel> managerViewModels = new List<ManagerViewModel>();
@@ -22,7 +25,38 @@
             {
                 managerViewModels.Add(MapManagerModelToManagerViewModel(orderModel));
             }
+
             return View(managerViewModels);
+        }
+
+        [Authorize(Roles = WebConstants.AdminRole)]
+        [HttpGet]
+        public ActionResult NewManager()
+        {
+            CreateManagerViewModel createManagerViewModel = new CreateManagerViewModel();
+            return View(createManagerViewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = WebConstants.AdminRole)]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewManager(CreateManagerViewModel manager)
+        {
+            if (!ModelState.IsValid) return View(manager);
+            try
+            {
+                var managerId = _managerService.Add(new ManagerModel
+                {
+                    SecondName = manager.Name,
+                });
+                return RedirectToAction("Index", "Manager");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            return View(manager);
         }
 
         private ManagerViewModel MapManagerModelToManagerViewModel(ManagerModel managerModel)
@@ -31,30 +65,6 @@
             {
                 Manager = managerModel.SecondName
             };
-        }
-
-        public ActionResult NewManager()
-        {
-            CreateManagerViewModel createManagerViewModel = new CreateManagerViewModel(); 
-            return View(createManagerViewModel);
-        }
-        [HttpPost]
-        public ActionResult NewManager(CreateManagerViewModel manager)
-        {
-            if(!ModelState.IsValid)return View(manager);
-            try
-            {
-                var managerId = _managerService.Add(new ManagerModel
-                {
-                    SecondName = manager.Name,
-                });
-                return Redirect("/Manager/Index");
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("",ex.Message);
-            }
-            return View(manager);
         }
     }
 }

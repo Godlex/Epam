@@ -22,7 +22,7 @@
         
         public UserModel GetByEMailAndPassword(string email, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = _context.Users.Include("Role").FirstOrDefault(u => u.Email == email && u.Password == password);
             return MapUserToUserModel(user);
         }
         public void Add(UserModel userModel)
